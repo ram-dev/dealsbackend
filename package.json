@@ -1,0 +1,57 @@
+{
+  "name": "server-backend",
+  "version": "0.0.1",
+  "description": "Backend",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "author": "YofferZ",
+  "license": "ISC",
+  "dependencies": {
+    "async": "^2.0.0-rc.6",
+    "bcrypt-nodejs": "0.0.3",
+    "body-parser": "^1.15.1",
+    "cron": "^1.1.0",
+    "deep-diff": "^0.3.4",
+    "drupal-hash": "^1.0.4",
+    "eventemittercollector": "^0.3.14",
+    "express": "^4.13.4",
+    "keygenerator": "^1.0.4",
+    "md5-file": "^3.1.1",
+    "method-override": "^2.3.6",
+    "moment": "^2.13.0",
+    "mongodb": "^2.1.18",
+    "mongoose": "^4.8.1",
+    "morgan": "^1.7.0",
+    "mssql": "^3.3.0",
+    "ng-dropdown-multiselect": "^1.0.1",
+    "node-base64-image": "^0.1.2",
+    "node-forge": "^0.6.48",
+    "node-restful": "^0.2.5",
+    "nodemailer": "^2.6.4",
+    "passport": "^0.3.2",
+    "passport-http-bearer": "^1.0.1",
+    "path": "^0.12.7",
+    "pm2": "^1.1.3",
+    "q": "^1.4.1",
+    "uglify": "^0.1.5",
+    "vinyl-source-stream": "^1.1.0",
+    "watch": "^0.18.0",
+    "winston": "^2.3.1",
+    "xml2js": "^0.4.16",
+    "xmldoc": "^0.5.1"
+  },
+  "devDependencies": {
+    "mocha": "^2.5.3",
+    "should": "^9.0.2",
+    "supertest": "^1.2.0"
+  },
+  "keywords": [
+    "Backend"
+  ]
+}

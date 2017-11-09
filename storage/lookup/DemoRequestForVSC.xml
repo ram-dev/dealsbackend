@@ -1,0 +1,10 @@
+<b>Hi<b>
+	
+<b>Requested Person Details<b>
+<b>Name: {name} <b>
+<b>Clinic/Hospital Name: {clinic} <b>
+<b>Phone Number: {phone} <b>
+<b>Email address: {email} <b>
+<b>Address: {address} <b>
+<b>Zip: {zip} <b>
+<b>Preferred method of contact: {methodOfContact} <b>

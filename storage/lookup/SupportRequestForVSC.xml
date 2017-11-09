@@ -1,0 +1,9 @@
+<b>Hi<b>
+	
+<b>Support request<b>
+<b>I AM A: {userType} <b>
+<b>NAME: {name} <b>
+<b>E-MAIL: {email} <b>
+<b>SUBJECT: {subject} <b>
+<b>MESSAGE: {message} <b>
+<b>WOULD LIKE ADDITIONAL INFORMATION ABOUT VSC: {additionInfo} <b>

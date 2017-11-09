@@ -1,0 +1,10 @@
+[
+    {
+        "name": "Local FactoryServer",
+        "address": "127.0.0.1"
+    },
+    {
+        "name": "Local Factory Server",
+        "address": "13.93.8.65"
+    }
+]

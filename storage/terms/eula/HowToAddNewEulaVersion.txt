@@ -1,0 +1,12 @@
+1) Add new files named NewVersion_eula_languageCode_COUNTRYCODE.json to this folder
+E.g.
+2_eula_sv_SE.json
+
+2) Add new item to array in eula.json file. Translatons shall be empty, will be fetched automatically.
+E.g.
+{
+   "version": 2,
+   "header": "VSC Terms & Conditions",
+   "translations": [
+   ]
+}

@@ -1,0 +1,135 @@
+{
+	"id": "9c791b93-7015-4f2a-32bb-2a7554475a4b",
+	"name": "Yofferz",
+	"description": "",
+	"order": [
+		"8a2533e6-532a-076f-6020-140f78148d27",
+		"1b71c6c9-26ee-4be4-f0ce-6db019664915",
+		"ec2844a2-98e0-13e3-4139-5d605ba3c531",
+		"33af955b-6c3d-f645-303d-fc4d866fbbba"
+	],
+	"folders": [],
+	"folders_order": [],
+	"timestamp": 1508072860581,
+	"owner": 0,
+	"public": false,
+	"requests": [
+		{
+			"id": "1b71c6c9-26ee-4be4-f0ce-6db019664915",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://localhost:3000/frontend/api/v1/login",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1508073331000,
+			"name": "LogIn",
+			"description": "",
+			"collectionId": "9c791b93-7015-4f2a-32bb-2a7554475a4b",
+			"responses": [],
+			"rawModeData": "{\n\t\"username\":\"merchantAdmin1@mail.com\",\n\t\"password\":\"qwerty\"\n}"
+		},
+		{
+			"id": "33af955b-6c3d-f645-303d-fc4d866fbbba",
+			"headers": "",
+			"headerData": [],
+			"url": "http://localhost:3000/frontend/api/v1/reset/:token",
+			"queryParams": [],
+			"pathVariables": {
+				"token": ""
+			},
+			"pathVariableData": [
+				{
+					"key": "token",
+					"value": ""
+				}
+			],
+			"preRequestScript": null,
+			"method": "POST",
+			"collectionId": "9c791b93-7015-4f2a-32bb-2a7554475a4b",
+			"data": [],
+			"dataMode": "raw",
+			"name": "reset",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1508080156738,
+			"version": 2,
+			"responses": [],
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"rawModeData": ""
+		},
+		{
+			"id": "8a2533e6-532a-076f-6020-140f78148d27",
+			"headers": "Authorization: Bearer DcIx9CMkdOUDfPvT9XP7M5oknuz9vSWr\n",
+			"headerData": [
+				{
+					"key": "Authorization",
+					"value": "Bearer DcIx9CMkdOUDfPvT9XP7M5oknuz9vSWr",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://localhost:3000/frontend/api/v1/logout",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": null,
+			"dataMode": "params",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1508073562453,
+			"name": "Logout",
+			"description": "",
+			"collectionId": "9c791b93-7015-4f2a-32bb-2a7554475a4b",
+			"responses": []
+		},
+		{
+			"id": "ec2844a2-98e0-13e3-4139-5d605ba3c531",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://localhost:3000/frontend/api/v1/forgot",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1508076287092,
+			"name": "forgot",
+			"description": "",
+			"collectionId": "9c791b93-7015-4f2a-32bb-2a7554475a4b",
+			"responses": [],
+			"rawModeData": ""
+		}
+	]
+}

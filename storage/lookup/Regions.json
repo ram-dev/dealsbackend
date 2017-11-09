@@ -1,0 +1,36 @@
+[
+    {
+        "name": "India",
+        "regionCode": "IN",
+        "countryIdArray": [31],
+        "description": "India",
+        "url": "https=://yofferz.com",
+        "serverType": "Prod",
+        "imageName": "india.png",
+        "languages": [
+            {
+                "languageCode": "en_IN",
+                "nativeName": "IN-English",
+                "imageName": "india.png",
+                "countryNativeName": "India",
+                "countryId": 10
+            }
+        ],
+        "ContactInfo": [
+            {
+                "name": "YofferZ India",
+                "contacts": {
+                    "street": "#121 xyz ",
+                    "zip": "560068",
+                    "city": "Dehli",
+                    "country": "India",
+                    "email": "info@yofferz.com",
+                    "phone": "080 21213232",
+                    "fax": "080 434343433"
+                },
+                "url": "http://www.yofferz.com",
+                "hours": "10am-7pm Mon-Fri"
+            }
+        ]
+    }    
+]

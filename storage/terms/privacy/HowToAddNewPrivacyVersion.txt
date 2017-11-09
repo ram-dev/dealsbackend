@@ -1,0 +1,12 @@
+1) Add new files named NewVersion_privacy_languageCode_COUNTRYCODE.json to this folder
+E.g.
+2_privacy_sv_SE.json
+
+2) Add new item to array in privacy.json file. Translatons shall be empty, will be fetched automatically.
+E.g.
+{
+    "version": 2,
+    "header": "Privacy Statement",
+    "translations": [
+    ]
+}
