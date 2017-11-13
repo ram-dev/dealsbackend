@@ -19,11 +19,7 @@ module.exports = {
  */
 function Post() {
     return [
-        function(req, res){
-            console.log(req);
-            res.status(200).json({});
-        },
-        /*passport.isBearerAndMerchantOrMerchantAdminOrSuperAdmin,
+        passport.isBearerAndMerchantOrMerchantAdminOrSuperAdmin,
         function checkHeader(req, res) {
             var user = req.user;
             var Token = req.vsc.db.model(dbModels.tokenModel);
@@ -37,6 +33,6 @@ function Post() {
                 res.status(200).json({});
                 return;
             });
-        }*/
+        }
     ];
 }
