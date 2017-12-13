@@ -25,7 +25,7 @@ config.ram.smtp = {
     host: 'smtp.office365.com', port: 587,
     auth: {
         user: 'ramkumar.consult@gmail.com',
-        pass: 'Ram'
+        pass: 'Ramkiran@123'
     }
 };
 

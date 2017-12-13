@@ -160,6 +160,7 @@ function validatePassword(req, res, next) {
 
 function loginUserIsMerchant(req, res, next) {
     var user = req.vsc.user;
+    
     var RoleTypes = req.vsc.db.Schemas[dbModels.roleModel].Types;
     if (user.roleId._id.toString() === RoleTypes.MerchantRole) {
         next();

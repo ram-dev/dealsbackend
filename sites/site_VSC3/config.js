@@ -28,7 +28,7 @@ config.ram.smtp = {
     host: 'smtp.gmail.com', port: 587,
     auth: {
         user: 'ramkumar.consult@gmail.com',
-        pass: 'Ram'
+        pass: 'Ramkiran@123'
     }
 };
 

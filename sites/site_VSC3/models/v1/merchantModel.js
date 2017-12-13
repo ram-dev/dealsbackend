@@ -10,6 +10,8 @@ var MerchantModel = module.exports = new Schema({
     funds : {type: Schema.Types.String, required: false},
     created: { type: Number, required: true, default: Date.now },
     updated: { type: Number, required: true, default: Date.now },
+    updated_by: { type: Schema.Types.ObjectId, required: false, ref: dbModels.userModel },
+    created_By: { type: Schema.Types.ObjectId, required: false, ref: dbModels.userModel },
 });
 
 var name = dbModels.merchantModel;

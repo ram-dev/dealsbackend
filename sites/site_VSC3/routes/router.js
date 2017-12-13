@@ -32,6 +32,7 @@ function setupDefaultMiddleWare (Router) {
  */
 function populateFrontendAPI(frontendRouter) {
     var LoginRoute = require('./frontendAPI/v1/loginRoute');
+    var RegisterRoute = require('./frontendAPI/v1/registerRoute');
     var LogoutRoute = require('./frontendAPI/v1/logoutRoute');   
     var ForgotPwdRoute = require('./frontendAPI/v1/forgotPwdRoute');
     var ResetPwdRoute = require('./frontendAPI/v1/resetPwdRoute');
@@ -39,6 +40,7 @@ function populateFrontendAPI(frontendRouter) {
     
 
     LoginRoute.use(frontendRouter);
+    RegisterRoute.use(frontendRouter);
     ForgotPwdRoute.use(frontendRouter);
     ResetPwdRoute.use(frontendRouter);
     LogoutRoute.use(frontendRouter);
