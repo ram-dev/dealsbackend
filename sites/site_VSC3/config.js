@@ -7,7 +7,7 @@ config.ram.db.port = 27017;
 config.ram.db.url = 'localhost';
 config.ram.db.username = 'mongoDBUser';
 config.ram.db.password = 'PerMongo';
-config.ram.db.databaseName = "ramtest1";
+config.ram.db.databaseName = "yozDB";
 config.ram.db.connectionString = "mongodb://" +
         // config.ram.db.username + ":" +
         // config.ram.db.password + "@" +

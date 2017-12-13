@@ -13,6 +13,30 @@ var initModels = module.exports.initModels = function (mongoose) {
     Schemas[Model.name] = Model;
     mongoose.model(Model.name, Model);    
 
+    Model = require('../models/v1/categoryType');
+    Schemas[Model.name] = Model;
+    mongoose.model(Model.name, Model); 
+
+    Model = require('../models/v1/merchantModel');
+    Schemas[Model.name] = Model;
+    mongoose.model(Model.name, Model);
+
+    Model = require('../models/v1/galleryModel');
+    Schemas[Model.name] = Model;
+    mongoose.model(Model.name, Model);
+
+    Model = require('../models/v1/outletModel');
+    Schemas[Model.name] = Model;
+    mongoose.model(Model.name, Model);
+
+    Model = require('../models/v1/amenityType');
+    Schemas[Model.name] = Model;
+    mongoose.model(Model.name, Model);  
+
+    Model = require('../models/v1/dealModel');
+    Schemas[Model.name] = Model;
+    mongoose.model(Model.name, Model);  
+
     Model = require('../models/v1/accessLogModel');
     Schemas[Model.name] = Model;
     mongoose.model(Model.name, Model);
@@ -28,6 +52,8 @@ var initModels = module.exports.initModels = function (mongoose) {
     Model = require('../models/v1/userModel');
     Schemas[Model.name] = Model;
     mongoose.model(Model.name, Model);   
+
+
 };
 
 initModels(vscDb);

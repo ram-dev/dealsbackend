@@ -3,4 +3,10 @@ module.exports.userModel = "User";
 module.exports.roleModel = "Role";
 module.exports.functionModel = "Function";
 module.exports.accessLogModel = "AccessLogModel";
-
+module.exports.categoryType = "categories";
+module.exports.merchantModel = "Merchant";
+module.exports.galleryModel = "Gallery";
+module.exports.outletModel = "Outlet";
+module.exports.amenityType = "amenity";
+module.exports.dealModel = "deal";
+module.exports.downloadDealModel = "downloadDeal";

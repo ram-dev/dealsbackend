@@ -68,7 +68,8 @@ var UserModel = module.exports = new Schema({
     loginAtempts: { type: Schema.Types.Number, required: true, default: 0 },
     locked: { type: Schema.Types.Boolean, required: true, default: false }, // locks the account
     // the DateTime the lock occured. should be removed when locked property is false.
-    lockDate: { type: Schema.Types.Date, required: false }
+    lockDate: { type: Schema.Types.Date, required: false },
+    isManual: { type: Schema.Types.Boolean, required: false, default: false },
 });
 
 UserModel.post(DB_ACTIONS.INIT, function () {
@@ -103,7 +104,11 @@ UserModel.pre(DB_ACTIONS.SAVE, function (callback) {
     if (this._omitLog === true) {
         return callback();
     }
-
+    
+    if(this.isManual){
+         callback();
+    }
+    
     if (this._editor == undefined) {
         return callback(new Error(ERROR_EDITOR_UNDEFINED));
     }
