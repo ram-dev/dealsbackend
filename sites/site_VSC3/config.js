@@ -27,8 +27,8 @@ config.ram.debug = true;
 config.ram.smtp = {
     host: 'smtp.gmail.com', port: 587,
     auth: {
-        user: 'ramkumar.consult@gmail.com',
-        pass: 'Ramkiran@123'
+        user: 'infoyofferz@gmail.com',
+        pass: 'infoqwerty@123'
     }
 };
 
@@ -81,8 +81,8 @@ config.demo.debug = true;
 config.demo.smtp = {
     host: 'smtp.gmail.com', port: 587,
     auth: {
-        user: 'ramkumar.consult@gmail.com',
-        pass: 'Ram'
+        user: 'infoyofferz@gmail.com',
+        pass: 'infoqwerty@123'
     }
 };
 
