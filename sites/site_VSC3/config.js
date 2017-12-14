@@ -17,7 +17,7 @@ config.ram.db.connectionString = "mongodb://" +
 
 // Default regionCode
 config.ram.default = {};
-config.ram.default.regionCode = "US";
+config.ram.default.regionCode = "IN";
 // Invite link Url
 config.ram.inviteLinkUrl = 'localhost';
 // if running the test case in localhost the debug should be true so that mail will not go
@@ -71,11 +71,11 @@ config.demo.db.connectionString = "mongodb://" +
 
 // Default regionCode
 config.demo.default = {};
-config.demo.default.regionCode = "IN";
+config.demo.default.regionCode = "US";
 // Invite link Url
 config.demo.inviteLinkUrl = 'localhost';
 // if running the test case in localhost the debug should be true so that mail will not go
-config.demo.debug = false;
+config.demo.debug = true;
 
 // Config for Office365 SMTP
 config.demo.smtp = {
@@ -128,7 +128,7 @@ process.argv.forEach(function (val, index, array) {
 });
 // If not set use prod
 if (currentConfig == null)
-    currentConfig = config.demo;
+    currentConfig = config.ram;
 
 
 module.exports = currentConfig;
