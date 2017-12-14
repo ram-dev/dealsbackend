@@ -25,7 +25,7 @@ config.ram.debug = false;
 
 // Config for Office365 SMTP
 config.ram.smtp = {
-    host: 'smtp.gmail.com', port: 587,
+    service: "Gmail"
     auth: {
         user: 'infoyofferz@gmail.com',
         pass: 'infoqwerty@123'
@@ -79,7 +79,9 @@ config.demo.debug = true;
 
 // Config for Office365 SMTP
 config.demo.smtp = {
-    host: 'smtp.gmail.com', port: 587,
+    host: 'smtp.gmail.com',
+    port: 587,
+    secure: false,
     auth: {
         user: 'infoyofferz@gmail.com',
         pass: 'infoqwerty@123'
