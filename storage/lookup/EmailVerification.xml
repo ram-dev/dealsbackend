@@ -1,17 +1,18 @@
 Hello from Yofferz,
-
-
-"ramkumarah" yofferz account has initiated a request to verify this email address, <a href="mailto:{receiver}">{receiver}</a>.
-
+<br>
+<br>
+"{username}" yofferz account has initiated a request to verify this email address, <a href="mailto:{receiver}">{receiver}</a>.<br>
+<br>
 To complete the email verification process, click the following link and then log in to your Yofferz account:<br>
-
-&nbsp; &nbsp; <a href="{url}/#/emailverification/{token}" target="_blank">{url}/#/emailverification/{token}</a>
-
+<br>
+&nbsp; &nbsp; <a href="{url}/#/emailverification/{token}" target="_blank">{url}/#/emailverification/{token}</a><br>
+<br>
 For your account's protection, the above link is good for single use and expires in one week.<br>
-
-If you have never logged into this Yofferz account before, contact the Admin User on the account at <a href="mailto:{receiver}">{receiver}</a> for further instructions or <a href="mailto:{replay}">{replay}</a> for assistance.
-
-Best regards,
-Yofferz
-
+<br>
+<br>
+If you have never logged into this Yofferz account before, contact the Admin User on the account at <a href="mailto:{receiver}">{receiver}</a> for further instructions or <a href="mailto:{replay}">{replay}</a> for assistance.<br>
+<br>
+Best regards,<br>
+Yofferz<br>
+<br><br>
 <a href="http://yofferz.com" target="_blank">http://yofferz.com</a>
