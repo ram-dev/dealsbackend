@@ -22,7 +22,7 @@ config.ram.db = {};
 
 // Config for connection to Office365 SMTP
 config.ram.smtp = {
-    host: 'smtp.office365.com', port: 587,
+    service: "Gmail"
     auth: {
         user: 'infoyofferz@gmail.com',
         pass: 'infoqwerty@123'
