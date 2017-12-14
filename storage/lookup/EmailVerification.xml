@@ -1,7 +1,7 @@
 Hello from Yofferz,
 <br>
 <br>
-"{username}" yofferz account has initiated a request to verify this email address, <a href="mailto:{receiver}">{receiver}</a>.<br>
+The "{username}" yofferz account has initiated a request to verify this email address, <a href="mailto:{receiver}">{receiver}</a>.<br>
 <br>
 To complete the email verification process, click the following link and then log in to your Yofferz account:<br>
 <br>
