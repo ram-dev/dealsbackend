@@ -311,7 +311,7 @@ function createSuperAdmin(connection){
                 var objectArray = [
                 {                                       
                     username : "ram@superadmin.com",
-                    password : "123456789",
+                    password : "12345678",
                     firstName : "Super",
                     lastName : "Admin",
                     gender : "Male",                                   
@@ -321,7 +321,7 @@ function createSuperAdmin(connection){
                 },
                 {                                       
                     username : "ram@test.com",
-                    password : "123456789",
+                    password : "12345678",
                     firstName : "Ram",
                     lastName : "test",
                     gender : "Male",                                       
@@ -331,7 +331,7 @@ function createSuperAdmin(connection){
                 },
                 {                                  
                     username : "ram@merchant.com",
-                    password : "123456789",
+                    password : "12345678",
                     firstName : "Ram",
                     lastName : "merchant",
                     gender : "Male",
@@ -341,7 +341,7 @@ function createSuperAdmin(connection){
                 },
                 {                                  
                     username : "ram@merchantadmin.com",
-                    password : "123456789",
+                    password : "12345678",
                     firstName : "Ram",
                     lastName : "merchantadmin",
                     gender : "Male",                                     
@@ -351,7 +351,7 @@ function createSuperAdmin(connection){
                 },
                 {                                  
                     username : "ram@client.com",
-                    password : "123456789",
+                    password : "12345678",
                     firstName : "Ram",
                     lastName : "client",
                     gender : "Male",                                    
