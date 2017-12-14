@@ -4,7 +4,7 @@ var restHelper = require('../../../util/restHelper');
 var dbModels = require('../../../util/dbModels');
 var Config = require('../../../config');
 var moment = require('moment');
-var sendInviteMailSender = require('../../../util/forgotPwdMailSender');
+var sendInviteMailSender = require('../../../util/emailVerificationMailSender');
 var fs = require('fs');
 var Storage = require(__base).Storage;
 
@@ -161,10 +161,11 @@ function generateToken(req, res, next) {
 
 function sendMail(req, res, next) {
     var receiver = req.yoz.newUser.username;
+    var name = req.yoz.newUser.firstName+' '+ req.yoz.newUser.lastName;
     var subject = HEADER_SUBJECT;
     var token = req.yoz.newUser.oneTimeToken;
 
-    fs.readFile(Storage.LookupPath + '/OneTimeRegistrationBody.xml', function (err, data) {
+    fs.readFile(Storage.LookupPath + '/EmailVerification.xml', function (err, data) {
         if (err) {
             req.logger.error(err);
             return cb(err);
@@ -172,7 +173,10 @@ function sendMail(req, res, next) {
 
         var body = data.toString()
             .replace(/{token}/g, token)
-            .replace(/{url}/g, Config.inviteLinkUrl);
+            .replace(/{url}/g, Config.inviteLinkUrl)
+            .replace(/{receiver}/g, receiver)
+            .replace(/{username}/g, name)
+            .replace(/{replay}/g, Config.infomail);
 
             async.waterfall([
                 function(callback) {                        

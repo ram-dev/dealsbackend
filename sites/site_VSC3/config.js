@@ -19,7 +19,10 @@ config.ram.db.connectionString = "mongodb://" +
 config.ram.default = {};
 config.ram.default.regionCode = "IN";
 // Invite link Url
-config.ram.inviteLinkUrl = 'localhost';
+config.ram.inviteLinkUrl = 'http://dev.yofferz.com';
+
+config.ram.infomail = 'infoyofferz@gmail.com';
+
 // if running the test case in localhost the debug should be true so that mail will not go
 config.ram.debug = false;
 
@@ -76,7 +79,7 @@ config.demo.default.regionCode = "US";
 config.demo.inviteLinkUrl = 'localhost';
 // if running the test case in localhost the debug should be true so that mail will not go
 config.demo.debug = true;
-
+config.demo.infomail = 'infoyofferz@gmail.com';
 // Config for Office365 SMTP
 config.demo.smtp = {
     host: 'smtp.gmail.com',
