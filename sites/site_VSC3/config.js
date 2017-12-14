@@ -21,7 +21,7 @@ config.ram.default.regionCode = "IN";
 // Invite link Url
 config.ram.inviteLinkUrl = 'localhost';
 // if running the test case in localhost the debug should be true so that mail will not go
-config.ram.debug = true;
+config.ram.debug = false;
 
 // Config for Office365 SMTP
 config.ram.smtp = {
