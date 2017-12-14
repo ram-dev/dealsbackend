@@ -25,7 +25,7 @@ config.ram.debug = false;
 
 // Config for Office365 SMTP
 config.ram.smtp = {
-    service: "Gmail"
+    service: "Gmail",
     auth: {
         user: 'infoyofferz@gmail.com',
         pass: 'infoqwerty@123'
