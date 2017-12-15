@@ -24,7 +24,7 @@ const USER_RESPONSE = {
     ERROR_LOGIN_ACCOUNT_LOCKED: "Account is locked",
     ERROR_PASSWORD_MISSING: "Password and confirm password is mandatory",
     ERROR_PASSWORD_NOT_MATCH: " password and Confirm password does not match",
-    ERROR_FIELD_REQUIRED: "Field is required",
+    ERROR_FIELD_REQUIRED: "All fields are required",
     ERROR_UNABLE_TO_UPDATE_ONE_TIME_TOKEN_OF_USER: "--- Unable to update oneTimeToken of user, received: ",
     VERIFY_TOKEN_ERROR : "Could not find login credentials with one-time login token: ",
     VERIFY_TOKEN_ERROR_EXPIRED :"You have tried to use a one-time login link that has expired. Please request a new link to system admin.",
