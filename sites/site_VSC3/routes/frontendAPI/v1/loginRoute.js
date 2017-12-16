@@ -163,7 +163,15 @@ function loginUserIsMerchant(req, res, next) {
     
     var RoleTypes = req.vsc.db.Schemas[dbModels.roleModel].Types;
     if (user.roleId._id.toString() === RoleTypes.MerchantRole) {
-        next();
+        if (Config.debug) {
+            next();
+        }else{
+            if(user.oneTimeToken == undefined){
+                next();
+            }else{
+                return restHelper.badRequest(res, "pending email verification");
+            }
+        }        
     } else {
         restHelper.wrongUsernameOrPassword(res);
     }
