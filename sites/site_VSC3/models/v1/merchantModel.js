@@ -13,11 +13,11 @@ const DB_ACTIONS = {
     INIT :"init",
     CREATE:"create"
 };
-const ERROR_OPTION_EDITOR_UNDEFIEND = "options._editor needs to be set in the update method to be able to interract with the model.";
 const ERROR_EDITOR_UNDEFINED = "this._editor needs to be set in the UserModel object to be able to interract with the model.";
 
 var MerchantModel = module.exports = new Schema({
-    name: {type: Schema.Types.String, required: true, unique: true},   
+    name: {type: Schema.Types.String, required: true, unique: true},  
+    userId :{ type: Schema.Types.ObjectId, required: true, ref: dbModels.userModel }, 
     categories: [{ type: Schema.Types.ObjectId, required: true, ref: dbModels.categoryType }], 
     amenities: [{ type: Schema.Types.ObjectId, required: false, ref: dbModels.amenityType }], 
     url: { type: Schema.Types.String, required: false },
@@ -52,22 +52,19 @@ function setUpdateDate (callback) {
         return callback(new Error(ERROR_EDITOR_UNDEFINED));
     }
 
-    callback();
-};
-
-MerchantModel.pre(DB_ACTIONS.SAVE, function (callback) {
     var eventEmitter = activityLogg.getEmitter();
     var original = this._original || {};
     var delta = diff(original, this.toObject());
     if (!this.isNew) {
-        eventEmitter.emit(DB_ACTIONS.UPDATE, dbModels.merchantModel, this._id, this._original.created_By, this._editor, delta);
+        eventEmitter.emit(DB_ACTIONS.UPDATE, dbModels.merchantModel, this._id, this._original.userId, this._editor, delta);
     }
     else {
-        eventEmitter.emit(DB_ACTIONS.CREATE, dbModels.merchantModel, this._id, this.created_By, this._editor, delta);
+        eventEmitter.emit(DB_ACTIONS.CREATE, dbModels.merchantModel, this._id, this.userId, this._editor, delta);
     }
 
     callback();
-});
+};
+
 
 var name = dbModels.merchantModel;
 module.exports.name = name;

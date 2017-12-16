@@ -37,8 +37,8 @@ module.exports.use = function(Router) {
 function RegisterMerchant() {
     return [
         checkmandatoryParams,
-        validateMerchant,
         validateUser,
+        validateMerchant,        
         saveMerchant,
         saveUser,
         generateToken,
@@ -219,7 +219,7 @@ function validateMerchant(req, res, next) {
     merchant.name = req.body.companyname;
     merchant.categories = [];
     merchant.categories.push(req.body.categoryId);
-
+    merchant.userId = req.yoz.user._id;
     var merchantModel = req.vsc.db.model(dbModels.merchantModel);
     var merchantObject = new merchantModel(merchant);
 
@@ -253,6 +253,7 @@ function saveMerchant(req, res, next) {
     merchant._editor = req.yoz.user;
     merchant.created_By = req.yoz.user._id;
     merchant.updated_by = req.yoz.user._id;
+    merchant._omitLog = true;
     merchant.save(function(err, newMerchant) {
         if (err) {
             return restHelper.unexpectedError(res, err);
