@@ -118,12 +118,8 @@ UserModel.pre(DB_ACTIONS.SAVE, function (callback) {
 });
 
 UserModel.post(DB_ACTIONS.SAVE, function (err, callback) {
-    var eventEmitter = activityLogg.getEmitter();
+    var eventEmitter = activityLogg.getEmitter();    
     
-    if (err) {
-        return callback();
-    }
-
     if (this._omitLog === true) {
         return callback();
     }

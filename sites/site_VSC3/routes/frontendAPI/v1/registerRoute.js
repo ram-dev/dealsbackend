@@ -239,6 +239,8 @@ function saveUser(req, res, next) {
     usermerchant._editor = req.yoz.user._id
     usermerchant.save(function(err, newMerchant) {
         if (err) {
+            var vendor =  req.yoz.newMerchant;
+            vendor.remove();
             return restHelper.unexpectedError(res, err);
         }
         req.yoz.newUser = newMerchant;
@@ -248,6 +250,7 @@ function saveUser(req, res, next) {
 
 function saveMerchant(req, res, next) {
     var merchant = req.yoz.merchant;
+    merchant._editor = req.yoz.user;
     merchant.created_By = req.yoz.user._id;
     merchant.updated_by = req.yoz.user._id;
     merchant.save(function(err, newMerchant) {
