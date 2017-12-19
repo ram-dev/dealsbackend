@@ -25,6 +25,8 @@ var OutletModel = module.exports = new Schema({
     contacts: contactSubModel, 
     created: { type: Number, required: true, default: Date.now },
     updated: { type: Number, required: true, default: Date.now },
+    updated_by: { type: Schema.Types.ObjectId, required: false, ref: dbModels.userModel },
+    created_by: { type: Schema.Types.ObjectId, required: false, ref: dbModels.userModel },
 });
 
 OutletModel.post(DB_ACTIONS.INIT, function () {
@@ -57,10 +59,10 @@ function setUpdateDate (callback) {
     newObj.contacts = newObj.contacts || {};
     var delta = diff(original, newObj);
     if (!this.isNew) {
-        eventEmitter.emit(DB_ACTIONS.UPDATE, dbModels.OutletModel, this._id, this._original.merchantId, this._editor, delta);
+        eventEmitter.emit(DB_ACTIONS.UPDATE, dbModels.outletModel, this._id, this._original.merchantId, this._editor, delta);
     }
     else {
-        eventEmitter.emit(DB_ACTIONS.CREATE, dbModels.OutletModel, this._id, this.merchantId, this._editor, delta);
+        eventEmitter.emit(DB_ACTIONS.CREATE, dbModels.outletModel, this._id, this.merchantId, this._editor, delta);
     }
 
     callback();

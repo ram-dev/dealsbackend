@@ -76,7 +76,7 @@ function getUser(req, res, next) {
     var username = req.body.username;
     var password = req.body.password;
 
-    var UserModel = req.vsc.db.model(dbModels.userModel);
+    var UserModel = req.yoz.db.model(dbModels.userModel);
     req.logger.debug(STRINGS.DEBUG_LOGIN_USERNAME + username);
     var query = { username: username, deleted: DELETED_STATUS };
 
@@ -93,14 +93,14 @@ function getUser(req, res, next) {
         } else {
             req.logger.debug(STRINGS.DEBUG_LOGIN_RESPONSE_USER, user.username);
             user._editor = user;
-            req.vsc.user = user;
+            req.yoz.user = user;
             next();
         }
     });
 };
 
 function checkIfUserIsLocked(req, res, next) {
-    var user = req.vsc.user;
+    var user = req.yoz.user;
     if (user.locked === true) {
         req.logger.debug(STRINGS.DEBUG_LOGIN_USER_LOCKED);
         if (moment(user.lockDate).add(LOCK_TIME, STRINGS.MINUTE) < new Date()) {
@@ -119,7 +119,7 @@ function checkIfUserIsLocked(req, res, next) {
 };
 
 function validatePassword(req, res, next) {
-    var user = req.vsc.user;
+    var user = req.yoz.user;
     var password = req.body.password;
     // Make sure the password is correct
     user.verifyPassword(password, function(err, isMatch) {
@@ -159,9 +159,9 @@ function validatePassword(req, res, next) {
 };
 
 function loginUserIsMerchant(req, res, next) {
-    var user = req.vsc.user;
+    var user = req.yoz.user;
     
-    var RoleTypes = req.vsc.db.Schemas[dbModels.roleModel].Types;
+    var RoleTypes = req.yoz.db.Schemas[dbModels.roleModel].Types;
     if (user.roleId._id.toString() === RoleTypes.MerchantRole) {
         if (Config.debug) {
             next();
@@ -178,9 +178,9 @@ function loginUserIsMerchant(req, res, next) {
 };
 
 function loginUser(req, res, next) {
-    var user = req.vsc.user;
+    var user = req.yoz.user;
 
-    var TokenModel = req.vsc.db.model(dbModels.tokenModel);
+    var TokenModel = req.yoz.db.model(dbModels.tokenModel);
 
     TokenModel.findOne({ userId: user._id }, function(err, token) {
         if (err) {
@@ -201,7 +201,7 @@ function loginUser(req, res, next) {
                 if (err) {
                     return restHelper.unexpectedError(res, err);
                 }
-                req.vsc.token = newtoken;
+                req.yoz.token = newtoken;
                 next();
             });
         } else {
@@ -214,7 +214,7 @@ function loginUser(req, res, next) {
                 if (err) {
                     return restHelper.unexpectedError(res, err);
                 }
-                req.vsc.token = update.value;
+                req.yoz.token = update.value;
                 next();
             });
         }
@@ -222,8 +222,8 @@ function loginUser(req, res, next) {
 };
 
 function populateResult(req, res) {
-    var user = req.vsc.user;
-    var token = req.vsc.token;
+    var user = req.yoz.user;
+    var token = req.yoz.token;
     var response = {}
     response._id = user._id;
     response.username = user.username;

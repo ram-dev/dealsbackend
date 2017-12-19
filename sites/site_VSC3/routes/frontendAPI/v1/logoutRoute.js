@@ -22,7 +22,7 @@ function Post() {
         passport.isBearerAndMerchantOrMerchantAdminOrSuperAdmin,
         function checkHeader(req, res) {
             var user = req.user;
-            var Token = req.vsc.db.model(dbModels.tokenModel);          
+            var Token = req.yoz.db.model(dbModels.tokenModel);          
             Token.remove({userId: user._id}, function (err) {
                 if (err) {
                     restHelper.unexpectedError(res, err);

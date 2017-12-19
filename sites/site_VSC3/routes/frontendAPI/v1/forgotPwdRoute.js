@@ -53,7 +53,7 @@ function Post() {
                 return restHelper.badRequest(res, USER_RESPONSE.ERROR_MISSING_PROPERTY);
             }
 
-            var UserModel = req.vsc.db.model(dbModels.userModel);
+            var UserModel = req.yoz.db.model(dbModels.userModel);
             UserModel.findOne({ username: email })
                 .exec(function (err, user) {
                     if (err) {
@@ -63,7 +63,7 @@ function Post() {
                         return restHelper.OK(res, {});
                     }
 
-                    req.vsc.loginCred = user;
+                    req.yoz.loginCred = user;
                     next();
                 });
         },
@@ -74,8 +74,8 @@ function Post() {
          * @param  {Object} next
          */
         function generateToken(req, res, next) {
-            var token = req.vsc.token = keygen.session_id({ length: 64 });
-            var loginCred = req.vsc.loginCred;
+            var token = req.yoz.token = keygen.session_id({ length: 64 });
+            var loginCred = req.yoz.loginCred;
             
             loginCred.update({ resetPasswordToken: token, resetPasswordExpires: Date.now() + expirationTime },{_editor: loginCred._id},
                 function (err, updateStatistics) {
@@ -85,7 +85,7 @@ function Post() {
                     else if (updateStatistics == undefined) {
                         return restHelper.OK(res, {});
                     }
-                    req.vsc.loginCred.resetPasswordToken = token;
+                    req.yoz.loginCred.resetPasswordToken = token;
                     next();
                 });
         },
@@ -97,9 +97,9 @@ function Post() {
          * @param  {Object} next
          */
         function sendMail(req, res, next) {
-            var receiver = req.vsc.loginCred.username;
+            var receiver = req.yoz.loginCred.username;
             var subject = STRINGS.HEADER_SUBJECT;
-            var token = req.vsc.loginCred.resetPasswordToken;
+            var token = req.yoz.loginCred.resetPasswordToken;
 
             fs.readFile(Storage.LookupPath + PATH_FORGOT_PASSWORD, function (err, data) {
                 if (err) {

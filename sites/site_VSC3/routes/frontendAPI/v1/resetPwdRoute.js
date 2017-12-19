@@ -43,7 +43,7 @@ function Post() {
         function fetchUserByResetToken(req, res, next) {
             var token = req.params.token;
 
-            var UserModel = req.vsc.db.model(dbModels.userModel);
+            var UserModel = req.yoz.db.model(dbModels.userModel);
 
             UserModel.findOne({ resetPasswordToken: token }, function (err, user) {
                 if (err) {
@@ -54,12 +54,12 @@ function Post() {
                     return restHelper.notFound(res, USER_RESPONSE.ERROR_NOTFIND_LOGINCRED + token);
                 }
 
-                req.vsc.user = user;
+                req.yoz.user = user;
                 next();
             });
         },
         function checkResetPasswordExpires(req, res, next) {
-            var user = req.vsc.user;
+            var user = req.yoz.user;
 
             if (user.resetPasswordExpires < new Date()) {
                 return restHelper.conflict(res, USER_RESPONSE.ERROR_TOKEN_EXPIRED);
@@ -68,7 +68,7 @@ function Post() {
             return next();
         },
         function resetPassword(req, res, next) {
-            var user = req.vsc.user;
+            var user = req.yoz.user;
             req.logger.info(STRINGS.INFO_RESET_PASSWORD, user.username);
             user.password = req.body.newpassword;
             user.resetPasswordToken = undefined;
@@ -83,8 +83,8 @@ function Post() {
             });
         },
         function removeLoginToken(req, res, next) {
-            var user = req.vsc.user;
-            var TokenModel = req.vsc.db.model(dbModels.tokenModel);
+            var user = req.yoz.user;
+            var TokenModel = req.yoz.db.model(dbModels.tokenModel);
             TokenModel.remove({ userId: user._id }, function (err) {
                 if (err) {
                     req.logger.error(STRINGS.ERROR_REMOVE_LOGINCRED, user.username);

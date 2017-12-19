@@ -67,7 +67,7 @@ function VerifyMerchant() {
 
 function verifyUserByOneTimeToken(req, res, next) {
     var token = req.params.tokenId;
-    var UserModel = req.vsc.db.model(dbModels.userModel);
+    var UserModel = req.yoz.db.model(dbModels.userModel);
     UserModel.findOne({ oneTimeToken: token }, function(err, user) {
         if (err) {
             return restHelper.unexpectedError(res, err);
@@ -192,7 +192,7 @@ function checkmandatoryParams(req, res, next) {
 
 function validateUser(req, res, next) {
     var user = {};
-    var RoleTypes = req.vsc.db.Schemas[dbModels.roleModel].Types;
+    var RoleTypes = req.yoz.db.Schemas[dbModels.roleModel].Types;
     user.username = req.body.username;
     user.password = req.body.password;
     user.firstName = req.body.firstName;
@@ -201,7 +201,7 @@ function validateUser(req, res, next) {
     user.contacts = {};
     user.contacts.phone1 = req.body.contactNumber;
 
-    var merchantUserModel = req.vsc.db.model(dbModels.userModel);
+    var merchantUserModel = req.yoz.db.model(dbModels.userModel);
     var merchant = new merchantUserModel(user);
 
     var err = merchant.validateSync();
@@ -220,7 +220,7 @@ function validateMerchant(req, res, next) {
     merchant.categories = [];
     merchant.categories.push(req.body.categoryId);
     merchant.userId = req.yoz.user._id;
-    var merchantModel = req.vsc.db.model(dbModels.merchantModel);
+    var merchantModel = req.yoz.db.model(dbModels.merchantModel);
     var merchantObject = new merchantModel(merchant);
 
     var err = merchantObject.validateSync();
@@ -236,7 +236,8 @@ function validateMerchant(req, res, next) {
 function saveUser(req, res, next) {
     var usermerchant = req.yoz.user;
     usermerchant.created_By = req.yoz.user._id;
-    usermerchant._editor = req.yoz.user._id
+    usermerchant._editor = req.yoz.user._id;
+    usermerchant.merchant = req.yoz.merchant._id;
     usermerchant.save(function(err, newMerchant) {
         if (err) {
             var vendor =  req.yoz.newMerchant;
