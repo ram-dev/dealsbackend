@@ -22,6 +22,7 @@ module.exports.use = function(Router) {
     Router.get('/v1/merchant/:merchantId', getMerchant());
     Router.post('/v1/merchant/:merchantId', merchantSave());
     Router.post('/v1/merchant/:merchantId/images', merchantSaveImg());
+    Router.get('/v1/merchant/:merchantId/images', getMerchantImg());
     Router.get('/v1/merchant/:merchantId/outlet', getMerchantOutlet());
     Router.get('/v1/merchant/:merchantId/outlet/:outletId', getMerchantOutlet());
     Router.post('/v1/merchant/:merchantId/outlet', merchantOutletSave());
@@ -54,6 +55,35 @@ function getMerchantOutlet() {
         fetchOutlets,
         format
     ];
+}
+
+function getMerchantImg(){
+    return [
+        passport.isBearerAndMerchantOrMerchantAdminOrSuperAdmin,
+        function(req, res, next) {
+            var merchantId = req.params.merchantId;
+            if (merchantId === undefined) {
+                return restHelper.badRequest(res, 'merchantId is missing');
+            }
+            next();
+        },
+        CheckUserAccess,
+        config,
+        queryPageing,
+        function fetchImg(req, res, next){
+            var GalleryModel = req.yoz.db.model(dbModels.galleryModel);
+            var query = req.yoz.query;
+            GalleryModel.find(query, {}, req.yoz.condition).
+            exec(function(err, outlet) {
+                if (err) {
+                    return restHelper.unexpectedError(res, err);
+                }
+                req.yoz.userInfoObj = outlet;
+                next();
+            });
+        },
+        format
+    ]
 }
 
 function merchantSave() {
