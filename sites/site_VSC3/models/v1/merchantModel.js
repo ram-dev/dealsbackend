@@ -18,8 +18,10 @@ const ERROR_EDITOR_UNDEFINED = "this._editor needs to be set in the UserModel ob
 var MerchantModel = module.exports = new Schema({
     name: {type: Schema.Types.String, required: true, unique: true},  
     userId :{ type: Schema.Types.ObjectId, required: true, ref: dbModels.userModel }, 
-    categories: [{ type: Schema.Types.ObjectId, required: true, ref: dbModels.categoryType }], 
-    amenities: [{ type: Schema.Types.ObjectId, required: false, ref: dbModels.amenityType }], 
+    categoryId: [
+        {type: Schema.Types.ObjectId, required: true, ref: dbModels.categoryType} // Shall also include the primary clinic
+    ],
+    amenityId: [{ type: Schema.Types.ObjectId, required: false, ref: dbModels.amenityType }], 
     url: { type: Schema.Types.String, required: false },
     amount : {type: Schema.Types.String, required: false},
     created: { type: Number, required: true, default: Date.now },

@@ -49,8 +49,7 @@ function RegisterMerchant() {
 
 function VerifyMerchant() {
     return [
-        function(req, res, next) {
-            req.yoz = {}
+        function(req, res, next) {            
             var token = req.params.token;
             if (token == '') {
                 return restHelper.badRequest(res, "token is required");
@@ -162,8 +161,7 @@ function checkOneTimeLoginExpires(req, res, next) {
 };
 
 
-function checkmandatoryParams(req, res, next) {
-    req.yoz = {};
+function checkmandatoryParams(req, res, next) {    
     var username = req.body.username || '';
     var password = req.body.password || '';
     var confirmpassword = req.body.confirmpassword || '';
@@ -217,8 +215,8 @@ function validateUser(req, res, next) {
 function validateMerchant(req, res, next) {
     var merchant = {};
     merchant.name = req.body.companyname;
-    merchant.categories = [];
-    merchant.categories.push(req.body.categoryId);
+    merchant.categoryId = [];
+    merchant.categoryId.push(req.body.categoryId);
     merchant.userId = req.yoz.user._id;
     var merchantModel = req.yoz.db.model(dbModels.merchantModel);
     var merchantObject = new merchantModel(merchant);

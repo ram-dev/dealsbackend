@@ -1,5 +1,5 @@
 var Mongoose = require('mongoose').Mongoose;
-var vscDb = module.exports = new Mongoose();
+var yozDb = module.exports = new Mongoose();
 var Config = require('../config');
 var async = require('async');
 
@@ -58,12 +58,12 @@ var initModels = module.exports.initModels = function (mongoose) {
 
 };
 
-initModels(vscDb);
+initModels(yozDb);
 
 module.exports.createDb = function (done) {
 
-    vscDb.connect(Config.db.connectionString);
-    var connection = vscDb.connection;
+    yozDb.connect(Config.db.connectionString);
+    var connection = yozDb.connection;
 
     connection.on('error', function (err) {
         return done(new Error("Failed to connect to db " + Config.db.connectionString + " due to \r\n " + err.message));

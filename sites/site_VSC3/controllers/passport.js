@@ -2,7 +2,7 @@ var Passport = require('passport');
 var BearerStrategy = require('passport-http-bearer').Strategy;
 var async = require('async');
 var dbModels = require('../util/dbModels');
-var db = require(__base).Repository.get('vsc');
+var db = require(__base).Repository.get('yoz');
 var RoleModel = require('../models/v1/roleModel');
 var logger = require(__base + '/lib/util/logger');
 
@@ -16,9 +16,8 @@ STRINGS.ERROR_INVALID_USER = "Invalid User"
 
 var error ={};
 
-Passport.use('vsc.merchantAdmin_merchant_SuperAdminBearer', new BearerStrategy({ "passReqToCallback": true },
-    function (req, accessToken, callback) {
-        console.log(accessToken);
+Passport.use('yoz.merchantAdmin_merchant_SuperAdminBearer', new BearerStrategy({ "passReqToCallback": true },
+    function (req, accessToken, callback) {       
         error.message = '';
         async.waterfall([
             function (cb) {
@@ -53,7 +52,7 @@ Passport.use('vsc.merchantAdmin_merchant_SuperAdminBearer', new BearerStrategy({
                         cb(null, user);
                     });
             }
-        ], function (err, result) {            
+        ], function (err, result) {                        
             if (err) {
                 logger.error(err);
                 return callback(err);
@@ -67,7 +66,7 @@ Passport.use('vsc.merchantAdmin_merchant_SuperAdminBearer', new BearerStrategy({
     }
 ));
 
-Passport.use('vsc.merchantAdmin_SuperAdminBearer', new BearerStrategy({ "passReqToCallback": true },
+Passport.use('yoz.merchantAdmin_SuperAdminBearer', new BearerStrategy({ "passReqToCallback": true },
     function (req, accessToken, callback) {
         error.message = '';
         async.waterfall([
@@ -116,7 +115,7 @@ Passport.use('vsc.merchantAdmin_SuperAdminBearer', new BearerStrategy({ "passReq
     }
 ));
 
-Passport.use('vsc.superAdminBearer', new BearerStrategy({ "passReqToCallback": true },
+Passport.use('yoz.superAdminBearer', new BearerStrategy({ "passReqToCallback": true },
     function (req, accessToken, callback) {
         error.message = '';
         async.waterfall([
@@ -198,6 +197,6 @@ function getToken(accessToken, req, cb) {
 };
 
 module.exports.convertCSRFToBearer = convertCSRFToBearer;
-exports.isBearerAndMerchantOrMerchantAdminOrSuperAdmin = Passport.authenticate('vsc.merchantAdmin_merchant_SuperAdminBearer', { session: false });
-module.exports.isBearerAndSuperAdminAuthenticated = Passport.authenticate('vsc.superAdminBearer', { session: false });
-exports.isBearerAndClinicAdminOrSuperAdmin = Passport.authenticate('vsc.merchantAdmin_SuperAdminBearer', { session: false });
+exports.isBearerAndMerchantOrMerchantAdminOrSuperAdmin = Passport.authenticate('yoz.merchantAdmin_merchant_SuperAdminBearer', { session: false });
+module.exports.isBearerAndSuperAdminAuthenticated = Passport.authenticate('yoz.superAdminBearer', { session: false });
+exports.isBearerAndClinicAdminOrSuperAdmin = Passport.authenticate('yoz.merchantAdmin_SuperAdminBearer', { session: false });

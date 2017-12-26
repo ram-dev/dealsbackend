@@ -1,5 +1,5 @@
 var Express = require('express');
-var vscRepo = require('./vscDbMiddleWare');
+var yozRepo = require('./yozDbMiddleWare');
 
 module.exports = {
     createRoutes: function(express) {
@@ -22,7 +22,7 @@ module.exports = {
 };
 
 function setupDefaultMiddleWare (Router) {
-    Router.all('*', vscRepo);    
+    Router.all('*', yozRepo);    
 };
 
 
@@ -36,7 +36,7 @@ function populateFrontendAPI(frontendRouter) {
     var LogoutRoute = require('./frontendAPI/v1/logoutRoute');   
     var ForgotPwdRoute = require('./frontendAPI/v1/forgotPwdRoute');
     var ResetPwdRoute = require('./frontendAPI/v1/resetPwdRoute');
-
+    var MerchantRoute = require('./frontendAPI/v1/merchantRoute');
     
 
     LoginRoute.use(frontendRouter);
@@ -44,5 +44,6 @@ function populateFrontendAPI(frontendRouter) {
     ForgotPwdRoute.use(frontendRouter);
     ResetPwdRoute.use(frontendRouter);
     LogoutRoute.use(frontendRouter);
+    MerchantRoute.use(frontendRouter);
     
 };

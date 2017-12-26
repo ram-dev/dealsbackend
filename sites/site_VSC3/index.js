@@ -1,1 +1,1 @@
-module.exports = require('./vsc');
+module.exports = require('./yoz');

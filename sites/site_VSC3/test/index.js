@@ -3,7 +3,6 @@ var config = require('../config');
 
 
 var Repository = require('../data/repository');
-console.log('rrrr 123123');
 Repository.createDb(function(err, connection){
     Repository.initModels(connection);
 });

@@ -9,7 +9,7 @@ var Storage = require('../../Storage');
 var fs = require('fs');
 var glob = require('glob');
 
-function vsc(sink) {
+function yoz(sink) {
     self = this;
     self.sink = sink;
 
@@ -28,7 +28,7 @@ function vsc(sink) {
             createMainCategoryIfNeeded(connection); 
             createSuperAdmin(connection)
 
-            repository.add("vsc", connection);
+            repository.add("yoz", connection);
 
             callback();
         });
@@ -373,4 +373,4 @@ function createSuperAdmin(connection){
 
 }
 
-module.exports = vsc;
+module.exports = yoz;

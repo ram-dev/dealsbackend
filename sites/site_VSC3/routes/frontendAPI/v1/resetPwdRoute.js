@@ -13,7 +13,7 @@ var dbModels = require('../../../util/dbModels');
 var restHelper = require('../../../util/restHelper');
 
 const STRINGS = {
-    INFO_RESET_PASSWORD: "VSC-Reset password API - %s",
+    INFO_RESET_PASSWORD: "yoz-Reset password API - %s",
     ERROR_REMOVE_LOGINCRED: "Fail to remove login credentials for id %s"
 }
 

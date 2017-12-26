@@ -1,6 +1,6 @@
 var logger = require(__base + '/lib/util/logger');
 var STINGS = {};
-STINGS.ERROR_MIAN = "-------- VSC Mobile API ------- : ";
+STINGS.ERROR_MIAN = "-------- yoz Mobile API ------- : ";
 /**
  * Send status code 401 as response, body contains error parameter
  * with description "Wrong username or password". 

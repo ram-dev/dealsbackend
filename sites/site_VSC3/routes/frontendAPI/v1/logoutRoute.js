@@ -4,7 +4,7 @@ var passport = require('../../../controllers/passport');
 var dbModels = require('../../../util/dbModels');
 
 const STRINGS = {
-    DEBUG_LOGOUT_SUCCESS: "VSC-Frontend Logout API and successfully logout %s"
+    DEBUG_LOGOUT_SUCCESS: "yoz-Frontend Logout API and successfully logout %s"
 }
 
 module.exports = {

@@ -19,7 +19,7 @@ var Storage = require(__base).Storage;
 var Config = require('../../../config');
 
 const STRINGS = {
-    HEADER_SUBJECT: "VSC - Forgotten password",
+    HEADER_SUBJECT: "yoz - Forgotten password",
     ERROR_FAILED_SEND_EMAIL: "Failed to send forgot password email to "  
 }
 

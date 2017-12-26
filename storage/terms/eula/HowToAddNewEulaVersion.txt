@@ -6,7 +6,7 @@ E.g.
 E.g.
 {
    "version": 2,
-   "header": "VSC Terms & Conditions",
+   "header": "YOZ Terms & Conditions",
    "translations": [
    ]
 }
