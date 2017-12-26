@@ -22,12 +22,7 @@ module.exports.use = function(Router) {
     Router.get('/v1/merchant/:merchantId', getMerchant());
     Router.post('/v1/merchant/:merchantId', merchantSave());
     Router.post('/v1/merchant/:merchantId/images', merchantSaveImg());
-    Router.get('/v1/merchant/:merchantId/images', getMerchantImg());
-    Router.get('/v1/merchant/:merchantId/outlet', getMerchantOutlet());
-    Router.get('/v1/merchant/:merchantId/outlet/:outletId', getMerchantOutlet());
-    Router.post('/v1/merchant/:merchantId/outlet', merchantOutletSave());
-    Router.put('/v1/merchant/:merchantId/outlet/:outletId', merchantOutletSave());
-    Router.delete('/v1/merchant/:merchantId/outlet/:outletId', deleteMerchantOutlet());
+    Router.get('/v1/merchant/:merchantId/images', getMerchantImg());      
 
 };
 
@@ -42,19 +37,6 @@ function getMerchant() {
         FetchMechants,
         format
     ]
-}
-
-function getMerchantOutlet() {
-    return [
-        passport.isBearerAndMerchantOrMerchantAdminOrSuperAdmin,
-        CheckUserAccess,
-        config,
-        queryPageing,
-        queryRestrictionForMerchant,
-        queryRestrictToFetchMerchantOutlet,
-        fetchOutlets,
-        format
-    ];
 }
 
 function getMerchantImg(){
@@ -100,7 +82,7 @@ function merchantSave() {
         CheckUserAccess,        
         function validateMerchant(req, res, next) {
             var merchant = req.body;
-            if(merchant.categoryId.length ==0){
+            if(merchant.categoryId.length == 0){
                 return restHelper.badRequest(res, 'categories is required');
             }
             var MerchantModel = req.yoz.db.model(dbModels.merchantModel);
@@ -178,89 +160,6 @@ function merchantSaveImg() {
     ];
 }
 
-function merchantOutletSave() {
-    return [
-        passport.isBearerAndMerchantOrMerchantAdminOrSuperAdmin,
-        function(req, res, next) {
-            req.yoz.query = {};
-            var merchantId = req.params.merchantId;
-            var outletId = req.params.outletId;
-            if (merchantId === undefined) {
-                return restHelper.badRequest(res, 'merchantId is missing');
-            }
-
-            if(outletId === undefined){
-                next();
-            }
-            req.yoz.query._id = outletId;
-            next();
-        },
-        CheckUserAccess,
-        function validateMerchantOutlet(req, res, next) {
-            var outlet = req.body;
-            outlet._id = req.yoz.query._id;
-            var OutletModel = req.yoz.db.model(dbModels.outletModel);
-            var outletObject = new OutletModel(outlet);
-
-            var err = outletObject.validateSync();
-
-            if (err) {
-                return restHelper.badRequest(res, err);
-            } else {
-                req.yoz.outletObj = outletObject;
-                next();
-            }
-        },
-        function saveMarchantOutlet(req, res) {
-            var user = req.user;
-            if(req.yoz.query._id === undefined){
-                req.yoz.outletObj.created_by = user._id;
-                req.yoz.outletObj.updated_by = user._id;
-            }else{
-                req.yoz.outletObj._id = req.yoz.query._id;
-                req.yoz.outletObj.updated_by = user._id;
-            }
-            var outletObj = req.yoz.outletObj;
-            outletObj.save(function(err, newMerchant) {
-                if (err) {
-                    return restHelper.unexpectedError(res, err);
-                }
-                return res.status(200).json(newMerchant);
-            });
-        }
-    ];
-}
-
-function deleteMerchantOutlet() {
-    return [
-        passport.isBearerAndMerchantOrMerchantAdminOrSuperAdmin,
-        function(req, res, next) {
-            req.yoz.query = {};
-            var merchantId = req.params.merchantId;
-            var outletId = req.params.outletId;
-            if (merchantId === undefined) {
-                return restHelper.badRequest(res, 'merchantId is missing');
-            }
-            if(outletId === undefined){
-                return restHelper.badRequest(res, 'outletId is missing');
-            }
-            req.yoz.query._id = outletId;
-            next();
-        },
-        CheckUserAccess,
-        function deleteOutlets(req, res, next){
-            var OutletModel = req.yoz.db.model(dbModels.outletModel);
-            var query = req.yoz.query;
-            OutletModel.remove(query, function(err) {
-                if (err) {
-                    return restHelper.unexpectedError(res, err);
-                }
-                return res.status(200).json({ "status": "OK" });
-            });
-        }
-    ];
-}
-
 function config(req, res, next) {
     req.yoz.query = {};
     req.yoz.condition = {};
@@ -333,36 +232,6 @@ function queryRestrictionForMerchant(req, res, next) {
     next();
 };
 
-function queryRestrictToFetchMerchantOutlet(req, res, next) {
-    var merchantId = req.params.merchantId;
-    var outletId = req.params.outletId;
-    if (userInfoId === undefined) {
-        return restHelper.badRequest(res, 'merchantId is missing');
-    }
-
-    req.yoz.query.merchantId = userInfoId;
-
-    if (outletId === undefined) {
-        next();
-    }
-
-    req.yoz.query._id = outletId;
-    next();
-};
-
-function fetchOutlets(req, res, next) {
-    var OutletModel = req.yoz.db.model(dbModels.outletModel);
-    var query = req.yoz.query;
-    OutletModel.find(query, {}, req.yoz.condition).
-    exec(function(err, outlet) {
-        if (err) {
-            return restHelper.unexpectedError(res, err);
-        }
-        req.yoz.userInfoObj = outlet;
-        next();
-    });
-};
-
 function CheckUserAccess(req, res, next) {    
     var user = req.user;   
     var Types = req.yoz.db.Schemas[dbModels.roleModel].Types;
@@ -394,3 +263,5 @@ function addParameters(dbObj, restObj) {
     }
     return result;
 };
+
+

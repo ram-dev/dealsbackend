@@ -19,6 +19,7 @@ const ERROR_EDITOR_UNDEFINED = "this._editor needs to be set in the UserModel ob
 
 var OutletModel = module.exports = new Schema({
 	merchantId :{ type: Schema.Types.ObjectId, required: true, ref: dbModels.merchantModel },
+    userId :{ type: Schema.Types.ObjectId, required: true, ref: dbModels.userModel }, 
 	name:{type: String, required: true},
 	latitude:{type: String, required: false},
 	longitude:{type: String, required: false},
