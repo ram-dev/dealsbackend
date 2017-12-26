@@ -18,7 +18,7 @@ const USER_RESPONSE = {
 
 module.exports.use = function(Router) {
 
-    Router.get('/v1/merchant/', getMerchant());
+    Router.get('/v1/merchant', getMerchant());
     Router.get('/v1/merchant/:merchantId', getMerchant());
     Router.post('/v1/merchant/:merchantId', merchantSave());
     Router.post('/v1/merchant/:merchantId/images', merchantSaveImg());
@@ -70,7 +70,8 @@ function getMerchantImg(){
         CheckUserAccess,
         config,
         queryPageing,
-        function fetchImg(req, res, next){
+        function fetchImg(req, res, next){            
+            req.yoz.query.merchantId = req.params.merchantId;            
             var GalleryModel = req.yoz.db.model(dbModels.galleryModel);
             var query = req.yoz.query;
             GalleryModel.find(query, {}, req.yoz.condition).
@@ -99,27 +100,43 @@ function merchantSave() {
         CheckUserAccess,        
         function validateMerchant(req, res, next) {
             var merchant = req.body;
-            var merchantModel = req.yoz.db.model(dbModels.merchantModel);
-            var merchantObject = new merchantModel(merchant);
+            if(merchant.categoryId.length ==0){
+                return restHelper.badRequest(res, 'categories is required');
+            }
+            var MerchantModel = req.yoz.db.model(dbModels.merchantModel);
+            var merchantObject = new MerchantModel(merchant);
 
             var err = merchantObject.validateSync();
 
             if (err) {
                 return restHelper.badRequest(res, err);
-            } else {
-                req.yoz.merchantObj = merchantObject;
+            } else {                   
                 next();
             }
         },
+        function fetchMechant(req, res, next){
+            var MerchantModel = req.yoz.db.model(dbModels.merchantModel);
+            MerchantModel.findOne({_id: req.params.merchantId}, function (err, merchantDetails) {
+                if(err){
+                    return restHelper.unexpectedError(res, err); 
+                }
+                req.yoz.merchantObj = merchantDetails;
+                next();
+            })
+            
+        },
         function saveMarchant(req, res) {
-            var user = req.user;
+            var user = req.user;    
+            addParameters(req.yoz.merchantObj, req.body);
             req.yoz.merchantObj.updated_by = user._id;
-            var merchantObj = req.yoz.merchantObj;
-            merchantObj.save(function(err, newMerchant) {
+            req.yoz.merchantObj._editor = user._id;                     
+            req.yoz.merchantObj.categoryId = req.body.categoryId;
+            var merchantObj = req.yoz.merchantObj;           
+            merchantObj.save(function(err) {
                 if (err) {
                     return restHelper.unexpectedError(res, err);
                 }
-                return res.status(200).json(newMerchant);
+                return res.status(200).json({'status':'OK'});
             });
         }
     ];
@@ -275,12 +292,12 @@ function queryRestrictToFetchMerchant(req, res, next) {
 
 function FetchMechants(req, res, next) {
     var MerchantModel = req.yoz.db.model(dbModels.merchantModel);
-    var query = req.yoz.query;
+    var query = req.yoz.query;   
     MerchantModel.find(query, {}, req.yoz.condition).
     exec(function(err, user) {
         if (err) {
             return restHelper.unexpectedError(res, err);
-        }
+        }        
         req.yoz.userInfoObj = user;
         next();
     });
@@ -311,7 +328,7 @@ function queryRestrictionForMerchant(req, res, next) {
     if (user.roleId.equals(Types.SuperAdminRole)) {
         return next();
     } else {
-        req.yoz.query.merchant = user.merchant;
+        req.yoz.query.userId = user._id;
     }
     next();
 };
@@ -346,13 +363,14 @@ function fetchOutlets(req, res, next) {
     });
 };
 
-function CheckUserAccess(req, res, next) {
-    var user = req.user;
-    var Types = req.vsc.db.Schemas[dbModels.roleModel].Types;
+function CheckUserAccess(req, res, next) {    
+    var user = req.user;   
+    var Types = req.yoz.db.Schemas[dbModels.roleModel].Types;
 
     if (user.roleId.equals(Types.SuperAdminRole) || user.roleId.equals(Types.MerchantAdminRole)) {
         return next();
     } else if (user.roleId.equals(Types.MerchantRole)) {
+
         var merchantId = req.params.merchantId;
         if (user.merchant.equals(merchantId)) {
             return next();
@@ -361,4 +379,18 @@ function CheckUserAccess(req, res, next) {
     } else {
         return restHelper.unAuthorized(res, USER_RESPONSE.UPDATE_CLINIC_UNAUTHORIZED);
     }
+};
+
+function addParameters(dbObj, restObj) {
+    var result = {};
+    for (var property in restObj) {
+        if (restObj[property] instanceof Object) {
+            result[property] = addParameters(dbObj[property], restObj[property]);
+        }
+        else {
+            result[property] = dbObj[property];
+            dbObj[property] = restObj[property];
+        }
+    }
+    return result;
 };
