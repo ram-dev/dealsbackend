@@ -73,14 +73,28 @@ function saveOutlets() {
         },
         function saveORUpdateCheck(req, res, next){
             if(req.yoz.query._id){
+                var user = req.user;
+                var body = req.body;
                 var OutletModel = req.yoz.db.model(dbModels.outletModel);
                 var query = req.yoz.query;
                 OutletModel.findOne( query , function (err, updateoutlet) {
                     if(err){
                         return restHelper.unexpectedError(res, err); 
                     }
-                    req.yoz.outletObj = updateoutlet;
-                    next();
+                                       
+                    updateoutlet.name = body.name;
+                    updateoutlet.latitude = body.latitude;
+                    updateoutlet.longitude = body.longitude;
+                    addParameters(updateoutlet.contacts, body.contacts);
+                    updateoutlet.updated_by = user._id;
+                    updateoutlet._editor = user._id; 
+                    updateoutlet.save(function(err, outletUpdate) {
+                        if (err) {
+                            return restHelper.unexpectedError(res, err);
+                        }else{
+                            return res.status(200).json(outletUpdate);
+                        }                
+                    });                  
                 });
             }else{
                 next()
@@ -243,4 +257,18 @@ function format(req, res) {
             userInfo = userInfo[0];
     }
     return restHelper.OK(res, userInfo);   
+};
+
+function addParameters(dbObj, restObj) {
+    var result = {};
+    for (var property in restObj) {
+        if (restObj[property] instanceof Object) {
+            result[property] = addParameters(dbObj[property], restObj[property]);
+        }
+        else {
+            result[property] = dbObj[property];
+            dbObj[property] = restObj[property];
+        }
+    }
+    return result;
 };
