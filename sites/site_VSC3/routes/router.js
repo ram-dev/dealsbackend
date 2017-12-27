@@ -38,6 +38,7 @@ function populateFrontendAPI(frontendRouter) {
     var ResetPwdRoute = require('./frontendAPI/v1/resetPwdRoute');
     var MerchantRoute = require('./frontendAPI/v1/merchantRoute');
     var OutletRoute = require('./frontendAPI/v1/outletRoute');
+    var UserRoute = require('./frontendAPI/v1/userRoute');
 
     LoginRoute.use(frontendRouter);
     RegisterRoute.use(frontendRouter);
@@ -46,5 +47,6 @@ function populateFrontendAPI(frontendRouter) {
     LogoutRoute.use(frontendRouter);
     MerchantRoute.use(frontendRouter);
     OutletRoute.use(frontendRouter);
+    UserRoute.use(frontendRouter);
     
 };

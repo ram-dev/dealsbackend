@@ -158,6 +158,49 @@ Passport.use('yoz.superAdminBearer', new BearerStrategy({ "passReqToCallback": t
     }
 ));
 
+Passport.use('yoz.merchantBearer', new BearerStrategy({ "passReqToCallback": true },
+    function (req, accessToken, callback) {
+        error.message = '';
+        async.waterfall([
+            function (cb) {
+                cb(null, accessToken, req);
+            },
+            getToken,
+            function getUser(token, cb) {
+                if (!cb) {
+                    cb = token;
+                    return cb();
+                }
+
+                UserModel.findOne({ _id: token.userId, roleId: RoleModel.Types.MerchantRole }).
+                    exec(function (err, user) {
+                        if (err) {
+                            logger.error(err);
+                            return cb(err);
+                        }
+
+                        if (!user) {
+                            error.message = STRINGS.ERROR_INVALID_USER;    
+                            return cb();
+                        }
+
+                        cb(null, user);
+                    });
+            }
+        ], function (err, result) {           
+            if (err) {
+                logger.error(err);
+                return callback(err);
+            } else if (!result) {
+                logger.error(STRINGS.ERROR_UNAUTH +' : '+error.message);
+                return callback(null, false);
+            }
+
+            callback(null, result, { scope: '*' });
+        });
+    }
+));
+
 function convertCSRFToBearer(req, res, next) {
     if (req.headers['x-csrf-token']) {
         req.headers.authorization = "Bearer " + req.headers['x-csrf-token'];
@@ -200,3 +243,4 @@ module.exports.convertCSRFToBearer = convertCSRFToBearer;
 exports.isBearerAndMerchantOrMerchantAdminOrSuperAdmin = Passport.authenticate('yoz.merchantAdmin_merchant_SuperAdminBearer', { session: false });
 module.exports.isBearerAndSuperAdminAuthenticated = Passport.authenticate('yoz.superAdminBearer', { session: false });
 exports.isBearerAndClinicAdminOrSuperAdmin = Passport.authenticate('yoz.merchantAdmin_SuperAdminBearer', { session: false });
+module.exports.isBearerAndMerchantAuthenticated = Passport.authenticate('yoz.merchantBearer', { session: false });
