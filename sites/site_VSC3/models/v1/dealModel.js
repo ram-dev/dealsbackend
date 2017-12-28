@@ -39,7 +39,7 @@ var DealModel = module.exports = new Schema({
 	created: { type: Number, required: true, default: Date.now },
     updated: { type: Number, required: true, default: Date.now },
     updated_by: { type: Schema.Types.ObjectId, required: false, ref: dbModels.userModel },
-    created_By: { type: Schema.Types.ObjectId, required: false, ref: dbModels.userModel },
+    created_by: { type: Schema.Types.ObjectId, required: false, ref: dbModels.userModel },
 });
 
 
