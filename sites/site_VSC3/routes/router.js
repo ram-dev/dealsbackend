@@ -39,6 +39,7 @@ function populateFrontendAPI(frontendRouter) {
     var MerchantRoute = require('./frontendAPI/v1/merchantRoute');
     var OutletRoute = require('./frontendAPI/v1/outletRoute');
     var UserRoute = require('./frontendAPI/v1/userRoute');
+    var DealRoute = require('./frontendAPI/v1/dealRoute');
 
     LoginRoute.use(frontendRouter);
     RegisterRoute.use(frontendRouter);
@@ -48,5 +49,5 @@ function populateFrontendAPI(frontendRouter) {
     MerchantRoute.use(frontendRouter);
     OutletRoute.use(frontendRouter);
     UserRoute.use(frontendRouter);
-    
+    DealRoute.use(frontendRouter);
 };
