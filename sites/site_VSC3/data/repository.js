@@ -41,7 +41,9 @@ var initModels = module.exports.initModels = function (mongoose) {
     Schemas[Model.name] = Model;
     mongoose.model(Model.name, Model);  
 
-   
+    Model = require('../models/v1/downloadDealModel');
+    Schemas[Model.name] = Model;
+    mongoose.model(Model.name, Model);
     
     Model = require('../models/v1/functionModel');
     Schemas[Model.name] = Model;

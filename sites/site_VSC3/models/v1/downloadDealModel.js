@@ -14,7 +14,9 @@ var DownloadDealModel = module.exports = new Schema({
 	dealName: {type: Schema.Types.String, required: true },
 	couponCode: {type: Schema.Types.String, required: true, unique: true},
     contactNumber: {type: Schema.Types.String, required: true},
+    merchantId :{ type: Schema.Types.ObjectId, required: true, ref: dbModels.merchantModel },
     contactName: {type: Schema.Types.String, required: false},
+    oneTimeExpires: { type: Date, required: false },   
     created: { type: Number, required: true, default: Date.now },
     updated: { type: Number, required: true, default: Date.now },
 });
