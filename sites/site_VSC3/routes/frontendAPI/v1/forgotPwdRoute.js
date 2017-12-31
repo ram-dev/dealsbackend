@@ -112,7 +112,7 @@ function Post() {
                     .replace(/{token}/g, token)
                     .replace(/{url}/g, Config.inviteLinkUrl)
                     .replace(/{receiver}/g, receiver)
-                    .replace(/{username}/g, name)
+                    .replace(/{name}/g, name)
                     .replace(/{replay}/g, Config.infomail);
 
                 async.waterfall([
