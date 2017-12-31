@@ -33,7 +33,7 @@ function Post() {
     return [
         function checkBodyParam(req, res, next) {
             var body = req.body;
-
+                body.newpassword = body.password;
             if (body.newpassword == undefined) {
                 return restHelper.badRequest(res, USER_RESPONSE.ERROR_MISSING_PARAMS);
             }
@@ -51,7 +51,7 @@ function Post() {
                 }
 
                 if (user == undefined) {
-                    return restHelper.notFound(res, USER_RESPONSE.ERROR_NOTFIND_LOGINCRED + token);
+                    return restHelper.notFound(res, USER_RESPONSE.ERROR_NOTFIND_LOGINCRED);
                 }
 
                 req.yoz.user = user;

@@ -107,7 +107,12 @@ function Post() {
                     return cb(err);
                 }
 
-                var body = data.toString().replace(/{token}/g, token );
+                var body = data.toString()
+                    .replace(/{token}/g, token)
+                    .replace(/{url}/g, Config.inviteLinkUrl)
+                    .replace(/{receiver}/g, receiver)
+                    .replace(/{username}/g, name)
+                    .replace(/{replay}/g, Config.infomail);
 
                 forgotPwdMailSender.sendMailTo(receiver, subject, body, function (err, info) {
                     if (err) {
