@@ -24,7 +24,7 @@ config.ram.inviteLinkUrl = 'http://dev.yofferz.com';
 config.ram.infomail = 'infoyofferz@gmail.com';
 
 // if running the test case in localhost the debug should be true so that mail will not go
-config.ram.debug = true;
+config.ram.debug = false;
 
 // Config for Office365 SMTP
 config.ram.smtp = {
