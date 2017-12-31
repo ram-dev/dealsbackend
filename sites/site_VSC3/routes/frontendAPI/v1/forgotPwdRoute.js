@@ -99,6 +99,7 @@ function Post() {
         function sendMail(req, res, next) {
             var receiver = req.yoz.loginCred.username;
             var subject = STRINGS.HEADER_SUBJECT;
+            var name = req.yoz.loginCred.firstName + ' ' + req.yoz.loginCred.lastName;
             var token = req.yoz.loginCred.resetPasswordToken;
 
             fs.readFile(Storage.LookupPath + PATH_FORGOT_PASSWORD, function (err, data) {
