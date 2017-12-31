@@ -26,7 +26,7 @@ const USER_RESPONSE = {
     ERROR_PASSWORD_NOT_MATCH: " password and Confirm password does not match",
     ERROR_FIELD_REQUIRED: "All fields are required",
     ERROR_UNABLE_TO_UPDATE_ONE_TIME_TOKEN_OF_USER: "--- Unable to update oneTimeToken of user, received: ",
-    VERIFY_TOKEN_ERROR : "Could not find login credentials with one-time login token: ",
+    VERIFY_TOKEN_ERROR : "Could not find login credentials with one-time login token ",
     VERIFY_TOKEN_ERROR_EXPIRED :"You have tried to use a one-time login link that has expired. Please request a new link to system admin.",
 }
 module.exports.use = function(Router) {
@@ -72,7 +72,7 @@ function verifyUserByOneTimeToken(req, res, next) {
             return restHelper.unexpectedError(res, err);
         }
         if (user == undefined) {
-            return restHelper.notFound(res, USER_RESPONSE.VERIFY_TOKEN_ERROR + token);
+            return restHelper.notFound(res, USER_RESPONSE.VERIFY_TOKEN_ERROR);
         }
         req.yoz.merchant = user;
         next();
