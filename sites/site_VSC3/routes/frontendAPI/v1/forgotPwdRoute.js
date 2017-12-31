@@ -114,13 +114,27 @@ function Post() {
                     .replace(/{username}/g, name)
                     .replace(/{replay}/g, Config.infomail);
 
-                forgotPwdMailSender.sendMailTo(receiver, subject, body, function (err, info) {
+                async.waterfall([
+                    function(callback) {
+                        if (Config.debug) {
+                            callback();
+                        } else {
+                            forgotPwdMailSender.sendMailTo(receiver, subject, body, function(err, info) {
+                                if (err) {
+                                    req.logger.error(STRINGS.ERROR_FAILED_SEND_EMAIL + receiver + " \r\n" + err.message);
+                                    callback(err);
+                                } else {
+                                    callback(null, info);
+                                }
+                            });
+                        }
+                    },
+                ], function(err, result) {
                     if (err) {
-                        req.logger.error(STRINGS.ERROR_FAILED_SEND_EMAIL + receiver + " \r\n" + err.message);
+                        return restHelper.unexpectedError(res, err);
                     }
-                });
-
-                next();
+                    next();
+                });                
             });
         },
         /**
