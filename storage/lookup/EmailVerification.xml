@@ -5,7 +5,7 @@ The "{username}" yofferz account has initiated a request to verify this email ad
 <br>
 To complete the email verification process, click the following link and then log in to your Yofferz account:<br>
 <br>
-&nbsp; &nbsp; <a href="{url}/#/email-verify/{token}" target="_blank">{url}/#/email-verify/{token}</a><br>
+&nbsp; &nbsp; <a href="{url}/#/auth/email-verify/{token}" target="_blank">Click Here</a><br>
 <br>
 For your account's protection, the above link is good for single use and expires in one week.<br>
 <br>
