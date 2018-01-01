@@ -16,10 +16,22 @@ const USER_RESPONSE = {
 };
 
 module.exports.use = function(Router) {
+    Router.get('/v1/user', getCurrentUser());
     Router.get('/v1/user/:userID', getUser());
     Router.put('/v1/user/:userID', updateUser());
     Router.post('/v1/user/:userID/resetpwd', updateUserPassword());
 };
+
+function getCurrentUser(){
+    return [
+        passport.isBearerAndMerchantOrMerchantAdminOrSuperAdmin,
+        function(req, res, next){
+            req.yoz.userObj = req.user;
+            next();
+        },
+        format
+    ]
+}
 
 function getUser() {
     return [
