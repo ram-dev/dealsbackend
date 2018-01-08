@@ -350,7 +350,7 @@ function createMainAmenityIfNeeded(connection) {
                      {                        
                         name: "Tattoo & Piercing",                        
                         categortID :["5a290b84539eb0b14cd91d1a"],
-                         _id: "5a290b84539eb0b14cd91d1a",
+                         _id: "5a5351c856e60fcf90f1556d",
                     },
                      {                        
                         name: "Doorstep Services",                        
