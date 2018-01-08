@@ -779,47 +779,47 @@ function createSubAmenityIfNeeded(connection) {
                     {               
                         _id: "5a5342a9c6363e11949a5a2e",      
                         name: "Tattoo",                        
-                        aminityId :"5a533795d8d2095818be8a2b"
+                        aminityId :"5a5351c856e60fcf90f1556d"
                     },
                     {               
                         _id: "5a5342a9c6363e11949a5a2f",     
                         name: "Tattoo Removal",                        
-                        aminityId :"5a533795d8d2095818be8a2b"
+                        aminityId :"5a5351c856e60fcf90f1556d"
                     },
                     {               
                         _id: "5a5342a9c6363e11949a5a30",      
                         name: "Color Tattoo",                        
-                        aminityId :"5a533795d8d2095818be8a2b"
+                        aminityId :"5a5351c856e60fcf90f1556d"
                     },
                     {               
                         _id: "5a5342a9c6363e11949a5a31",      
                         name: "Black&White Tattoo",                        
-                        aminityId :"5a533795d8d2095818be8a2b"
+                        aminityId :"5a5351c856e60fcf90f1556d"
                     },
                     {               
                         _id: "5a5342a9c6363e11949a5a32",      
                         name: "Permanent Tattoo",                        
-                        aminityId :"5a533795d8d2095818be8a2b"
+                        aminityId :"5a5351c856e60fcf90f1556d"
                     },
                     {               
                         _id: "5a5342a9c6363e11949a5a33",      
                         name: "Temporary Tattoo",                        
-                        aminityId :"5a533795d8d2095818be8a2b"
+                        aminityId :"5a5351c856e60fcf90f1556d"
                     },
                     {               
                         _id: "5a5342a9c6363e11949a5a34",      
                         name: "Piercing",                        
-                        aminityId :"5a533795d8d2095818be8a2b"
+                        aminityId :"5a5351c856e60fcf90f1556d"
                     },
                     {               
                        _id: "5a5342a9c6363e11949a5a35",       
                         name: "Nose Piercing",                        
-                        aminityId :"5a533795d8d2095818be8a2b"
+                        aminityId :"5a5351c856e60fcf90f1556d"
                     },
                     {               
                         _id: "5a5342a9c6363e11949a5a36",      
                         name: "Ear Piercing",                        
-                        aminityId :"5a533795d8d2095818be8a2b"
+                        aminityId :"5a5351c856e60fcf90f1556d"
                     },
                     {               
                         _id: "5a5342a9c6363e11949a5a37",     
