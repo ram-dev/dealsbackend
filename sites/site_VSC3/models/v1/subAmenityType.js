@@ -3,10 +3,10 @@ var dbModels = require('../../util/dbModels');
 
 var Schema = mongoose.Schema;
 
-var AmenityTypeSchema = module.exports = new Schema({
+var SubAmenityTypeSchema = module.exports = new Schema({
     name: {type: Schema.Types.String, required: true},    
-    categortID:[{ type: Schema.Types.ObjectId, ref : dbModels.categoryType}]  
+    aminityId:{ type: Schema.Types.ObjectId, ref : dbModels.amenityType}   
 });
 
-var name = dbModels.amenityType;
+var name = dbModels.subAmenityType;
 module.exports.name = name;

@@ -35,6 +35,10 @@ var initModels = module.exports.initModels = function (mongoose) {
 
     Model = require('../models/v1/amenityType');
     Schemas[Model.name] = Model;
+    mongoose.model(Model.name, Model);
+
+    Model = require('../models/v1/subAmenityType');
+    Schemas[Model.name] = Model;
     mongoose.model(Model.name, Model);  
 
     Model = require('../models/v1/dealModel');
