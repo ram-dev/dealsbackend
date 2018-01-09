@@ -113,6 +113,7 @@ function merchantSave() {
             req.yoz.merchantObj.updated_by = user._id;
             req.yoz.merchantObj._editor = user._id;                     
             req.yoz.merchantObj.categoryId = req.body.categoryId;
+            req.yoz.merchantObj.amenityId = req.body.amenityId;
             var merchantObj = req.yoz.merchantObj;           
             merchantObj.save(function(err) {
                 if (err) {
