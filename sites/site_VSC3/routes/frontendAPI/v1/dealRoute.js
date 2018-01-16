@@ -192,7 +192,7 @@ function format(req, res) {
 function validateDeal(req, res, next) {
     var deal = req.body;
     deal.merchantId = req.params.merchantId;
-    deal.userId = req.user._id;
+    deal.userId = req.body.userId;
     var outletIds = [];
     for (var i = 0; i < deal.outletIds.length; i++) {        
         outletIds.push(deal.outletIds[i]);
@@ -215,7 +215,10 @@ function validateDeal(req, res, next) {
     if (err) {
         return restHelper.badRequest(res, err);
     } else {
-        req.yoz.validDealsObj = dealObject
+        req.yoz.validDealsObj = dealObject;
+        req.yoz.validDealsObj.images = deal.images;
+        req.yoz.validDealsObj.subCategoryIds = deal.subCategoryIds;
+        req.yoz.validDealsObj.outletIds = deal.outletIds;
         next();
     }
 };
