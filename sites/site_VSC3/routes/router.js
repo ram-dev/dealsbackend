@@ -42,6 +42,7 @@ function populateFrontendAPI(frontendRouter) {
     var DealRoute = require('./frontendAPI/v1/dealRoute');
     var DownloadDealRoute = require('./frontendAPI/v1/downloadDealRoute');
     var InternalRoute = require('./frontendAPI/v1/internalRoute');
+    var MerchantStatRoute = require('./frontendAPI/v1/merchantStatRoute');
 
     LoginRoute.use(frontendRouter);
     RegisterRoute.use(frontendRouter);
@@ -54,4 +55,5 @@ function populateFrontendAPI(frontendRouter) {
     DealRoute.use(frontendRouter);
     DownloadDealRoute.use(frontendRouter);
     InternalRoute.use(frontendRouter);
+    MerchantStatRoute.use(frontendRouter);
 };
