@@ -261,6 +261,7 @@ function dealUpdate(req, res, next){
     dealinfo.fundAllocation = modifiedData.fundAllocation;
     dealinfo.dayAllocationType = modifiedData.dayAllocationType;
     dealinfo._editor = req.user;
+    dealinfo.status = modifiedData.status || false;
     dealinfo.updated_by = req.user._id;
     dealinfo.save(function(err, dealData) {
         if (err) {
