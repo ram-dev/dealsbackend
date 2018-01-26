@@ -158,8 +158,13 @@ function fetchDeals(req, res, next) {
     var DealModel = req.yoz.db.model(dbModels.dealModel);
     var query = req.yoz.query;
 
-    DealModel.find(query, {}, req.yoz.condition).
-    exec(function(err, deals) {
+    DealModel.find(query, {}, req.yoz.condition)
+    .populate('mainCategoryId')
+    .populate('merchantId')
+    .populate('outletIds')
+    .populate('subCategoryIds')
+    .populate('images')
+    .exec(function(err, deals) {
         if (err) {
             return restHelper.unexpectedError(res, err);
         }

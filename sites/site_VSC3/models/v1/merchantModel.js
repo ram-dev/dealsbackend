@@ -23,7 +23,7 @@ var MerchantModel = module.exports = new Schema({
     ],
     amenityId: [{ type: Schema.Types.ObjectId, required: false, ref: dbModels.amenityType }], 
     url: { type: Schema.Types.String, required: false },
-    amount : {type: Schema.Types.String, required: false},
+    amount : {type: Schema.Types.String, required: false, default: 0},
     created: { type: Number, required: true, default: Date.now },
     updated: { type: Number, required: true, default: Date.now },
     updated_by: { type: Schema.Types.ObjectId, required: false, ref: dbModels.userModel },
