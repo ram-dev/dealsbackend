@@ -245,7 +245,7 @@ function dealUpdate(req, res, next){
     var modifiedData =  req.yoz.finalBody;  
     var dealinfo = req.yoz.dealsObj[0];
     dealinfo.name = modifiedData.name;
-    dealInfo.offer = modifiedData.offer;
+    dealinfo.offer = modifiedData.offer;
     dealinfo.mainCategoryId = modifiedData.mainCategoryId;
     dealinfo.outletIds = modifiedData.outletIds;
     dealinfo.offertype = modifiedData.offertype;
