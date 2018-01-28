@@ -61,11 +61,12 @@ function getMerchantImg(){
                 if (err) {
                     return restHelper.unexpectedError(res, err);
                 }
-                req.yoz.userInfoObj = outlet;
+                req.yoz.userInfoObj = outlet;               
+                
                 next();
             });
         },
-        format
+        formatimg
     ]
 }
 
@@ -151,6 +152,8 @@ function merchantSaveImg() {
         function saveGallery(req, res) {
             var user = req.user;
             var galleryObject = req.yoz.galleryObject;
+            const buffer = Buffer.from(req.body.image.data, 'base64');
+            galleryObject.image.data = buffer;
             galleryObject.save(function(err, newMerchant) {
                 if (err) {
                     return restHelper.unexpectedError(res, err);
@@ -201,6 +204,22 @@ function FetchMechants(req, res, next) {
         req.yoz.userInfoObj = user;
         next();
     });
+};
+
+function formatimg(req, res) {
+    var userInfo = req.yoz.userInfoObj;
+    var result = [];
+    for(var i = 0; i < userInfo.length; i++){
+        var obj ={};
+        obj.image = userInfo[i]._doc.image;
+        obj._id = userInfo[i]._doc._id;
+        obj.merchantId = userInfo[i]._doc.merchantId;
+        var s = new Buffer(userInfo[i]._doc.image.data, 'binary').toString('base64');
+        obj.imgdata = 'data:'+obj.image.filetype+';base64,'+s;
+        result.push(obj);                 
+    }
+    
+    restHelper.OK(res, result);
 };
 
 function format(req, res) {
