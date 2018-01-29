@@ -6,6 +6,7 @@ var async = require("async");
 var Config = require('../../../config');
 var mongoose = require('mongoose');
 var activityLogg = require('../../../util/activityLogg');
+var fs =require('fs')
 
 const STRINGS = {
 
@@ -218,8 +219,9 @@ function formatimg(req, res) {
         obj.imgdata = 'data:'+userInfo[i]._doc.image.filetype+';base64,'+s;
         result.push(obj);                 
     }
+    res.send(result);
     
-    res.end(restHelper.OK(res, result));
+    //res.end(restHelper.OK(res, result));
 };
 
 function format(req, res) {
