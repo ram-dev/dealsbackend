@@ -219,7 +219,7 @@ function formatimg(req, res) {
         result.push(obj);                 
     }
     
-    restHelper.OK(res, result);
+    res.end(restHelper.OK(res, result));
 };
 
 function format(req, res) {
