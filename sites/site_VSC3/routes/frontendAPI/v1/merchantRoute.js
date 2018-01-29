@@ -213,19 +213,10 @@ function FetchMechants(req, res, next) {
 
 function formatimg(req, res) {
     var userInfo = req.yoz.userInfoObj;
-   /* var result = [];
-    for(var i = 0; i < userInfo.length; i++){
-        var obj ={};
-        //obj.image = userInfo[i]._doc.image;
-        obj._id = userInfo[i]._doc._id;
-        obj.merchantId = userInfo[i]._doc.merchantId;
-        var s = new Buffer(userInfo[i]._doc.image.data, 'binary').toString('base64');
-        obj.imgdata = 'data:'+userInfo[i]._doc.image.filetype+';base64,'+s;
-        result.push(obj);                 
-    }*/
-    res.send(userInfo);
+   
     
-    //res.end(restHelper.OK(res, result));
+    
+    res.end(restHelper.OK(res, result));
 };
 
 function format(req, res) {
