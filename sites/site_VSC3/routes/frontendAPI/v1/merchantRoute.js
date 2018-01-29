@@ -153,11 +153,13 @@ function merchantSaveImg() {
         function saveGallery(req, res) {
             var buf = new Buffer(req.body.image.data, 'base64');
             var path = 'uploads/';
-            var relativePath = path+req.yoz.galleryObject._id+'_'+req.body.image.filename;
+            var filename = req.yoz.galleryObject._id+'_'+req.body.image.filename;
+            var fullpath = 'http://'+req.hostname+':3000/resources/' + filename;
+            var relativePath = path+filename;
             fs.writeFile(relativePath, buf);
             var user = req.user;
             var galleryObject = req.yoz.galleryObject;
-            galleryObject.path = relativePath;           
+            galleryObject.path = fullpath;           
             galleryObject.image.data = '';
             galleryObject.save(function(err, newMerchant) {
                 if (err) {
