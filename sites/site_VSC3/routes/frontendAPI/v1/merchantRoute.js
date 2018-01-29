@@ -216,7 +216,7 @@ function formatimg(req, res) {
    
     
     
-    res.end(restHelper.OK(res, result));
+    res.end(restHelper.OK(res, userInfo));
 };
 
 function format(req, res) {
