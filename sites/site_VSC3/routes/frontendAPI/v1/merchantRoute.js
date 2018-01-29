@@ -151,8 +151,8 @@ function merchantSaveImg() {
             }
         },
         function saveGallery(req, res) {
-            var buf = new Buffer(req.body.image.data, 'base64');
-            var path = 'uploads/';
+            var buf = new Buffer(req.body.image.data, 'base64');           
+            var path = __base+'uploads/';
             var filename = req.yoz.galleryObject._id+'_'+req.body.image.filename;
             var fullpath = 'http://'+req.hostname+':3000/resources/' + filename;
             var relativePath = path+filename;
@@ -215,7 +215,7 @@ function FetchMechants(req, res, next) {
 
 function formatimg(req, res) {
     var userInfo = req.yoz.userInfoObj;
-   
+   console.log(__base);
     
     
     res.end(restHelper.OK(res, userInfo));
