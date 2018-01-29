@@ -12,6 +12,7 @@ const DB_ACTIONS = {
 var GalleryModel = module.exports = new Schema({
 	merchantId :{ type: Schema.Types.ObjectId, required: true, ref: dbModels.merchantModel },
     image: { data: Buffer, filetype: String, filename: String, size: Number },
+    path:{type:String},
     created: { type: Number, required: true, default: Date.now },
     updated: { type: Number, required: true, default: Date.now },  
 });

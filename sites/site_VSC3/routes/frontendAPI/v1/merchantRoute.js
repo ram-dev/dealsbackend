@@ -151,10 +151,14 @@ function merchantSaveImg() {
             }
         },
         function saveGallery(req, res) {
+            var buf = new Buffer(req.body.image.data, 'base64');
+            var path = 'uploads/';
+            var relativePath = path+req.yoz.galleryObject._id+'_'+req.body.image.filename;
+            fs.writeFile(relativePath, buf);
             var user = req.user;
             var galleryObject = req.yoz.galleryObject;
-            const buffer = Buffer.from(req.body.image.data, 'base64');
-            galleryObject.image.data = buffer;
+            galleryObject.path = relativePath;           
+            galleryObject.image.data = '';
             galleryObject.save(function(err, newMerchant) {
                 if (err) {
                     return restHelper.unexpectedError(res, err);
@@ -209,7 +213,7 @@ function FetchMechants(req, res, next) {
 
 function formatimg(req, res) {
     var userInfo = req.yoz.userInfoObj;
-    var result = [];
+   /* var result = [];
     for(var i = 0; i < userInfo.length; i++){
         var obj ={};
         //obj.image = userInfo[i]._doc.image;
@@ -218,8 +222,8 @@ function formatimg(req, res) {
         var s = new Buffer(userInfo[i]._doc.image.data, 'binary').toString('base64');
         obj.imgdata = 'data:'+userInfo[i]._doc.image.filetype+';base64,'+s;
         result.push(obj);                 
-    }
-    res.send(result);
+    }*/
+    res.send(userInfo);
     
     //res.end(restHelper.OK(res, result));
 };
