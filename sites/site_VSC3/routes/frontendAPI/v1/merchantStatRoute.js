@@ -23,6 +23,7 @@ module.exports.use = function(Router) {
 function getMerchantStat() {
     return [
         passport.isBearerAndMerchantOrMerchantAdminOrSuperAdmin,
+        getmerchantID,
         CheckUserAccess,
         config,
         queryPageing,
@@ -142,6 +143,21 @@ function queryRestrictionForMerchant(req, res, next) {
         req.yoz.query.userId = user._id;
     }
     next();
+};
+
+function getmerchantID(req, res, next) {    
+    var user = req.user;   
+    var Types = req.yoz.db.Schemas[dbModels.roleModel].Types;
+    if(req.params.merchantId == undefined){
+        if (user.roleId.equals(Types.MerchantRole)) {
+            req.params.merchantId = user.merchant;
+            next()
+        }else{
+            next()
+        }
+    }else{
+        next()
+    }     
 };
 
 function CheckUserAccess(req, res, next) {    
