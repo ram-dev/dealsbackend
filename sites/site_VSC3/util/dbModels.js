@@ -11,3 +11,6 @@ module.exports.amenityType = "amenities";
 module.exports.subAmenityType = "subamenities";
 module.exports.dealModel = "deal";
 module.exports.downloadDealModel = "downloadDeal";
+module.exports.countryModel = "countries";
+module.exports.stateModel = "states";
+module.exports.cityModel = "cities";

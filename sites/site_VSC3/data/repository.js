@@ -13,6 +13,18 @@ var initModels = module.exports.initModels = function (mongoose) {
     Schemas[Model.name] = Model;
     mongoose.model(Model.name, Model);
 
+    Model = require('../models/v1/countryModel');
+    Schemas[Model.name] = Model;
+    mongoose.model(Model.name, Model);
+
+    Model = require('../models/v1/stateModel');
+    Schemas[Model.name] = Model;
+    mongoose.model(Model.name, Model);
+
+    Model = require('../models/v1/cityModel');
+    Schemas[Model.name] = Model;
+    mongoose.model(Model.name, Model);    
+
     var Model = require('../models/v1/tokenModel');
     Schemas[Model.name] = Model;
     mongoose.model(Model.name, Model);    

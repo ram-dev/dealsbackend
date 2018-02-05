@@ -242,5 +242,5 @@ function getToken(accessToken, req, cb) {
 module.exports.convertCSRFToBearer = convertCSRFToBearer;
 exports.isBearerAndMerchantOrMerchantAdminOrSuperAdmin = Passport.authenticate('yoz.merchantAdmin_merchant_SuperAdminBearer', { session: false });
 module.exports.isBearerAndSuperAdminAuthenticated = Passport.authenticate('yoz.superAdminBearer', { session: false });
-exports.isBearerAndClinicAdminOrSuperAdmin = Passport.authenticate('yoz.merchantAdmin_SuperAdminBearer', { session: false });
+exports.isBearerAndMerchantAdminOrSuperAdmin = Passport.authenticate('yoz.merchantAdmin_SuperAdminBearer', { session: false });
 module.exports.isBearerAndMerchantAuthenticated = Passport.authenticate('yoz.merchantBearer', { session: false });

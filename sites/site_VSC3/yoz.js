@@ -25,10 +25,15 @@ function yoz(sink) {
                 return callback(err);
             }           
 
+            
             createMainCategoryIfNeeded(connection); 
             createMainAmenityIfNeeded(connection);
             createSubAmenityIfNeeded(connection);
             createSuperAdmin(connection);
+
+            createCoutry(connection);
+            createState(connection);
+            createCity(connection);
 
             repository.add("yoz", connection);
 
@@ -40,6 +45,103 @@ function yoz(sink) {
         callback();
     });
 };
+
+function createCoutry(connection){
+    connection.db.listCollections({ name: dbModels.countryModel})
+        .next(function (err, countryinfo) {
+            if (err) {
+                return logger.error(err);
+            }
+
+            if (!countryinfo) {
+                logger.info('Creating country collection.');
+                var Model = require('./models/v1/countryModel');
+                var CountryType = connection.model(Model.name);
+
+                var objectArray = [
+                    {   
+                        _id : "5a783832985b510b3c48f29a",
+                        name: "India"                        
+                    }
+                ]
+                objectArray.forEach(function (element) {
+                    var countryType = new CountryType(element);
+                    countryType.save(function (err) {
+                        if (err) {
+                            logger.error(err);
+                        }
+                    });
+                }, this);
+            }
+        });
+}
+
+function createState(connection){
+    connection.db.listCollections({ name: dbModels.stateModel})
+        .next(function (err, stateinfo) {
+            if (err) {
+                return logger.error(err);
+            }
+
+            if (!stateinfo) {
+                logger.info('Creating states collection.');
+                var Model = require('./models/v1/stateModel');
+                var StateModel = connection.model(Model.name);
+
+                var objectArray = [                   
+                    {      
+                        _id : "5a783ef2aace532cd8132f4a",       
+                        name: "Delhi",
+                        countryId:"5a783832985b510b3c48f29a"
+                    }
+                ]
+                objectArray.forEach(function (element) {
+                    var stateModel = new StateModel(element);
+                    stateModel.save(function (err) {
+                        if (err) {
+                            logger.error(err);
+                        }
+                    });
+                }, this);
+            }
+        });
+}
+
+function createCity(connection){
+    connection.db.listCollections({ name: dbModels.cityModel})
+        .next(function (err, cityinfo) {
+            if (err) {
+                return logger.error(err);
+            }
+
+            if (!cityinfo) {
+                logger.info('Creating city collection.');
+                var Model = require('./models/v1/cityModel');
+                var CityModel = connection.model(Model.name);
+
+                var objectArray = [                   
+                    {                       
+                        _id: "5a783ef2aace532cd8132f50",
+                        name: "Delhi",
+                        stateId: "5a783ef2aace532cd8132f4a",
+                    },
+                    {                       
+                        _id : "5a783ef2aace532cd8132f51",
+                        name: "New Delhi",
+                        stateId: "5a783ef2aace532cd8132f4a",
+                    }
+                ]
+                objectArray.forEach(function (element) {
+                    var cityModel = new CityModel(element);
+                    cityModel.save(function (err) {
+                        if (err) {
+                            logger.error(err);
+                        }
+                    });
+                }, this);
+            }
+        });
+}
 
 
 function createMainCategoryIfNeeded(connection) {
@@ -527,7 +629,7 @@ function createSubAmenityIfNeeded(connection) {
                         aminityId :"5a533795d8d2095818be8a26"
                     },
                     {               
-                        _id: "5a5342a9c6363e11949a59fc",       
+                        _id: "5a5342a9c6363e11949a60fc",       
                         name: "Japanese",                        
                         aminityId :"5a533795d8d2095818be8a26"
                     },
