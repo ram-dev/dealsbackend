@@ -25,6 +25,7 @@ module.exports.use = function (Router) {
     Router.get('/v1/city/:stateId', getCity());
     Router.post('/v1/city', createCity());
     Router.put('/v1/city/:Id', updateCity());
+    Router.get('/v1/city', getAllCity());
 };
 
 function getCountry(){
@@ -120,6 +121,15 @@ function getCity(){
         fetchCity,
         format
     ];
+}
+
+function getAllCity(){
+    return [
+        config,
+        queryPageing,
+        fetchCity,
+        format
+    ]
 }
 
 function createCity(){
