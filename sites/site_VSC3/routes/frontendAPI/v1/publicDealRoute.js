@@ -17,7 +17,7 @@ const USER_RESPONSE = {
 
 module.exports.use = function(Router) {
     Router.get('/v1/deal', getAllDeal());
-    Router.get('/v1/deal/:dealId', getDealBydealID());   
+    Router.get('/v1/nondeal/:dealId', getDealBydealID());   
 };
 
 function getAllDeal() {
