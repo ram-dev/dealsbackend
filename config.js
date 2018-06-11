@@ -43,7 +43,7 @@ config.ram.certificatKeysPath = "/etc/yofferz/private";
 config.ram.upgrade = {};
 config.ram.upgrade.binariesPath = "/var/www/cwc_fileserver_ssl";
 config.ram.upgrade.httpsUrl = "https://cwcprod.yofferz.com:443";
-config.ram.allowRemoteOrigin = ['http://127.0.0.1:3000', 'http://localhost:3000','http://localhost:4200','http://dev.yofferz.com','http://35.186.188.164'];
+config.ram.allowRemoteOrigin = ['http://127.0.0.1:3000', 'http://localhost:3000','http://localhost:4200','http://dev.yofferz.com','http://35.186.188.164','http://dev.yofferz.com:81'];
 
 
 
