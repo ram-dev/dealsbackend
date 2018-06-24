@@ -5,17 +5,25 @@ module.exports = {
     createRoutes: function(express) {
        
         var frontendRouter = Express.Router();
+        var adminRouter = Express.Router();
        
         setupDefaultMiddleWare(frontendRouter);
+        setupDefaultMiddleWare(adminRouter);
        
         populateFrontendAPI(frontendRouter);
+        populateAdminAPI(adminRouter);
        
         express.use('/frontend/api', frontendRouter);
+        express.use('/admin/api', adminRouter);
 
         return [            
             {
                 api: '/frontend/api',
                 router: frontendRouter
+            },
+            {
+                api: '/admin/api',
+                router: adminRouter
             }
         ];
     }
@@ -25,6 +33,27 @@ function setupDefaultMiddleWare (Router) {
     Router.all('*', yozRepo);    
 };
 
+/**
+ * populates the Admin router with routes.
+ * @param  {} adminRouter the router to populate. 
+ */
+function populateAdminAPI(adminRouter){
+    var LoginRoute = require('./adminAPI/v1/loginRoute');
+    //var RegisterRoute = require('./adminAPI/v1/registerRoute');
+    var LogoutRoute = require('./adminAPI/v1/logoutRoute');
+    var ForgotPwdRoute = require('./adminAPI/v1/forgotPwdRoute');
+    var ResetPwdRoute = require('./adminAPI/v1/resetPwdRoute');
+    var UserRoute = require('./adminAPI/v1/userRoute');
+    var MerchantAdminRoute = require('./adminAPI/v1/merchantAdminRoute');
+
+    LoginRoute.use(adminRouter);
+    //RegisterRoute.use(adminRouter);
+    ForgotPwdRoute.use(adminRouter);
+    ResetPwdRoute.use(adminRouter);
+    LogoutRoute.use(adminRouter);
+    UserRoute.use(adminRouter);
+    MerchantAdminRoute.use(adminRouter);
+}
 
 /**
  * populates the Frontend router with routes.

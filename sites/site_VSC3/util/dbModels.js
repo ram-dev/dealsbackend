@@ -14,3 +14,4 @@ module.exports.downloadDealModel = "downloadDeal";
 module.exports.countryModel = "countries";
 module.exports.stateModel = "states";
 module.exports.cityModel = "cities";
+module.exports.accountModel = "account";

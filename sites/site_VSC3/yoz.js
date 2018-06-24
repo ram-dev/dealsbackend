@@ -1112,7 +1112,10 @@ function createSuperAdmin(connection){
                     gender : "Male",                                   
                     roleId : "584e7514df689623c3b0e039",
                     avatar : "Default.jpg",
-                    isManual: true                  
+                    isManual: true,
+                    contacts : {
+                        phone1 : "9876543210"                       
+                    }                 
                 },
                 {                                       
                     username : "ram@test.com",
@@ -1122,7 +1125,10 @@ function createSuperAdmin(connection){
                     gender : "Male",                                       
                     roleId : "584e7514df689623c3b0e039",
                     avatar : "Default.jpg",
-                    isManual: true                    
+                    isManual: true,
+                    contacts : {
+                        phone1 : "9876543210"                       
+                    }                 
                 },
                 {                                  
                     username : "ram@merchant.com",
@@ -1132,7 +1138,10 @@ function createSuperAdmin(connection){
                     gender : "Male",
                     roleId : "584e7514df689623c3b0e037",
                     avatar : "Default.jpg",
-                    isManual: true                    
+                    isManual: true,
+                    contacts : {
+                        phone1 : "9876543210"                       
+                    }                   
                 },
                 {                                  
                     username : "ram@merchantadmin.com",
@@ -1142,7 +1151,10 @@ function createSuperAdmin(connection){
                     gender : "Male",                                     
                     roleId : "584e7514df689623c3b0e038",
                     avatar : "Default.jpg",
-                    isManual: true                   
+                    isManual: true,
+                    contacts : {
+                        phone1 : "9876543210"                       
+                    }                 
                 },
                 {                                  
                     username : "ram@client.com",
@@ -1152,7 +1164,10 @@ function createSuperAdmin(connection){
                     gender : "Male",                                    
                     roleId : "584e7514df689623c3b0e036",
                     avatar : "Default.jpg",
-                    isManual: true                     
+                    isManual: true,
+                    contacts : {
+                        phone1 : "9876543210"                       
+                    }                    
                 }
                 ]
                 objectArray.forEach(function (element) {                    

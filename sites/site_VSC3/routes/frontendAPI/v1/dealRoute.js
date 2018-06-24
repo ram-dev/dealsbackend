@@ -262,6 +262,7 @@ function dealUpdate(req, res, next){
     dealinfo.dayAllocationType = modifiedData.dayAllocationType;
     dealinfo._editor = req.user;
     dealinfo.status = modifiedData.status || false;
+    dealinfo.golive = modifiedData.golive || false;
     dealinfo.updated_by = req.user._id;
     dealinfo.save(function(err, dealData) {
         if (err) {

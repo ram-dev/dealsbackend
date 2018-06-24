@@ -19,6 +19,7 @@ const ERROR_EDITOR_UNDEFINED = "this._editor needs to be set in the UserModel ob
 var DealModel = module.exports = new Schema({
 	name:{type: String, required: true},
 	status :{ type: Boolean, required: true, default: false},
+    golive :{ type: Boolean, required: true, default: false},
 	merchantId :{ type: Schema.Types.ObjectId, required: true, ref: dbModels.merchantModel },
     userId :{ type: Schema.Types.ObjectId, required: true, ref: dbModels.userModel }, 
 	mainCategoryId :{ type: Schema.Types.ObjectId, required: true, ref: dbModels.categoryType },
