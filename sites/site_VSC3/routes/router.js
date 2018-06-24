@@ -45,6 +45,7 @@ function populateAdminAPI(adminRouter){
     var ResetPwdRoute = require('./adminAPI/v1/resetPwdRoute');
     var UserRoute = require('./adminAPI/v1/userRoute');
     var MerchantAdminRoute = require('./adminAPI/v1/merchantAdminRoute');
+    var DealAdminRoute = require('./adminAPI/v1/dealAdminRoute');
 
     LoginRoute.use(adminRouter);
     //RegisterRoute.use(adminRouter);
@@ -53,6 +54,7 @@ function populateAdminAPI(adminRouter){
     LogoutRoute.use(adminRouter);
     UserRoute.use(adminRouter);
     MerchantAdminRoute.use(adminRouter);
+    DealAdminRoute.use(adminRouter);
 }
 
 /**

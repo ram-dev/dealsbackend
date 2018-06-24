@@ -36,7 +36,7 @@ var DealModel = module.exports = new Schema({
 	offertype_one:{type: String, required: false},
 	offertype_two:{type: String, required: false},
 	offerDeatils:{type: String, required: false},
-	fundAllocation :{type: String, required: false},	
+	fundAllocation :{type: String, required: false},
 	created: { type: Number, required: true, default: Date.now },
     updated: { type: Number, required: true, default: Date.now },
     updated_by: { type: Schema.Types.ObjectId, required: false, ref: dbModels.userModel },
