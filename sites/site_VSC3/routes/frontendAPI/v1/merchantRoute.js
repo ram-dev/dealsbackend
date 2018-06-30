@@ -23,9 +23,27 @@ module.exports.use = function(Router) {
     Router.get('/v1/merchant/:merchantId', getMerchant());
     Router.post('/v1/merchant/:merchantId', merchantSave());
     Router.post('/v1/merchant/:merchantId/images', merchantSaveImg());
-    Router.get('/v1/merchant/:merchantId/images', getMerchantImg());      
+    Router.get('/v1/merchant/:merchantId/images', getMerchantImg());  
+    Router.get('/v1/transaction/:merchantId', getMechantTransaction());    
 
 };
+
+function getMechantTransaction() {
+    return [
+        passport.isBearerAndMerchantOrMerchantAdminOrSuperAdmin,
+        function(req, res, next) {
+            var merchantId = req.params.merchantId;
+            if (merchantId === undefined) {
+                return restHelper.badRequest(res, 'merchantId is missing');
+            }
+            next();
+        },
+        CheckUserAccess,
+        config,
+        queryPageing,
+        fetchAccounts        
+    ]
+}
 
 function getMerchant() {
     return [
@@ -185,6 +203,7 @@ function queryPageing(req, res, next) {
         req.yoz.condition.limit = Number(req.query.limit);
     }
     if (req.query.sortBy != undefined) {
+        console.log(req.query.sortBy);
         req.yoz.condition.sort = req.query.sortBy;
     }
 
@@ -280,4 +299,31 @@ function addParameters(dbObj, restObj) {
     return result;
 };
 
+function fetchAccounts(req, res){
+    var AccountModel = req.yoz.db.model(dbModels.accountModel);
+    var query = req.yoz.query;   
+    AccountModel.find(query, {}, req.yoz.condition)
+    .sort({updated: -1})
+    .exec(function(err, accountList) {
+        if (err) {
+            return restHelper.unexpectedError(res, err);
+        }        
+       
+        for (var index = 0; index < accountList.length; index++) {
+            var element = accountList[index];
+            element.__v = undefined;
+            element.updated_by = undefined;
+            element.created_By = undefined;
+        }
+
+        if (accountList.length == 1) {
+            accountList[0].__v = undefined;
+            accountList[0].updated_by = undefined;
+            accountList[0].created_By = undefined;
+            
+        }
+        restHelper.OK(res, accountList);
+       
+    });
+}
 
