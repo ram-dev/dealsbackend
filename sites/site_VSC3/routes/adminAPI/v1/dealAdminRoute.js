@@ -22,7 +22,9 @@ const USER_RESPONSE = {
 module.exports.use = function(Router) {
     Router.get('/v1/deal', getAllDeal());
     Router.get('/v1/deal/:dealId', getDealBydealID());
-    Router.post('/v1/deal/:dealId/golive', goLiveDeal());    
+    Router.post('/v1/deal/:dealId/golive', goLiveDeal());
+    Router.put('/v1/deal/:merchantId/edit/:dealId', updateDeal());
+    Router.get('/v1/deal/:merchantId/view/:dealId', getDealBydealID());    
 };
 
 function getAllDeal() {
@@ -32,6 +34,26 @@ function getAllDeal() {
         CheckUserAccess,
         queryPageing,        
         fetchDeals,
+        format
+    ];
+}
+
+function updateDeal() {
+    return [
+        passport.isBearerAndMerchantAdminOrSuperAdmin,
+        config,        
+        CheckUserAccess,        
+        function filterDealById(req, res, next) {
+            console.log('test');
+            var dealId = req.params.dealId;
+            if (dealId == undefined || dealId == '') {
+                return restHelper.badRequest(res, 'dealId is missing');
+            }
+            req.yoz.query._id = dealId;
+            next();
+        },
+        updatefetchDeals,
+        dealUpdateStatus,
         format
     ];
 }
@@ -123,7 +145,11 @@ function fetchDeals(req, res, next) {
     var DealModel = req.yoz.db.model(dbModels.dealModel);
     var query = req.yoz.query;
     DealModel.find(query, {}, req.yoz.condition)    
-    .populate('merchantId')    
+    .populate('mainCategoryId')
+    .populate('merchantId')
+    .populate('outletIds')
+    .populate('subCategoryIds')
+    .populate('images')
     .exec(function(err, deals) {
         if (err) {
             return restHelper.unexpectedError(res, err);
@@ -132,6 +158,23 @@ function fetchDeals(req, res, next) {
             return res.status(200).json([]);
         }
         req.yoz.dealsObj = deals;
+        next();
+    });
+}
+
+function updatefetchDeals(req, res, next) {   
+    var DealModel = req.yoz.db.model(dbModels.dealModel);
+    var query = req.yoz.query;
+    DealModel.find(query, {}, req.yoz.condition)
+    .exec(function(err, deals) {
+        if (err) {
+            return restHelper.unexpectedError(res, err);
+        }
+        if (deals == undefined || deals.length == 0) {
+            return res.status(200).json([]);
+        }
+        req.yoz.dealsObj = deals;
+        console.log('test1');
         next();
     });
 }
@@ -152,6 +195,22 @@ function format(req, res) {
         dealInfo = dealInfo[0];
     }
     restHelper.OK(res, dealInfo);
+};
+
+function dealUpdateStatus(req, res, next){
+    var modifiedData =  req.body;  
+    var dealinfo = req.yoz.dealsObj[0];
+    dealinfo.status = modifiedData.status;
+    dealinfo.golive = modifiedData.golive;
+    dealinfo.updated_by = req.user._id;
+    dealinfo._editor = req.user;
+    dealinfo.save(function(err, dealData) {
+        if (err) {
+            return restHelper.unexpectedError(res, err);
+        }
+        req.yoz.dealsObj = dealData; 
+        next();        
+    });
 };
 
 function dealUpdate(req, res, next){  
