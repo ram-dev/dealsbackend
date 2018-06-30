@@ -23,7 +23,8 @@ module.exports.use = function(Router) {
 
     Router.get('/v1/merchant', getMerchant());
     Router.get('/v1/merchant/:merchantId', getMerchant());
-    Router.post('/v1/merchant/addamount/:merchantId', addAmountMerchant());     
+    Router.post('/v1/merchant/addamount/:merchantId', addAmountMerchant()); 
+    Router.get('/v1/merchant/:merchantId/images', getMerchantImg());    
 
 };
 
@@ -40,6 +41,36 @@ function getMerchant() {
     ]
 }
 
+function getMerchantImg(){
+    return [
+        passport.isBearerAndMerchantAdminOrSuperAdmin,
+        function(req, res, next) {
+            var merchantId = req.params.merchantId;
+            if (merchantId === undefined) {
+                return restHelper.badRequest(res, 'merchantId is missing');
+            }
+            next();
+        },
+        CheckUserAccess,
+        config,
+        queryPageing,
+        function fetchImg(req, res, next){            
+            req.yoz.query.merchantId = req.params.merchantId;            
+            var GalleryModel = req.yoz.db.model(dbModels.galleryModel);
+            var query = req.yoz.query;
+            GalleryModel.find(query, {}, req.yoz.condition).
+            exec(function(err, outlet) {
+                if (err) {
+                    return restHelper.unexpectedError(res, err);
+                }
+                req.yoz.userInfoObj = outlet;               
+                
+                next();
+            });
+        },
+        formatimg
+    ]
+}
 
 function addAmountMerchant(){
     return [
@@ -145,6 +176,7 @@ function FetchMechants(req, res, next) {
     MerchantModel.find(query, {}, req.yoz.condition)
     .populate('userId')
     .populate('categoryId')
+    .populate('amenityId')
     .exec(function(err, user) {
         if (err) {
             return restHelper.unexpectedError(res, err);

@@ -46,6 +46,7 @@ function populateAdminAPI(adminRouter){
     var UserRoute = require('./adminAPI/v1/userRoute');
     var MerchantAdminRoute = require('./adminAPI/v1/merchantAdminRoute');
     var DealAdminRoute = require('./adminAPI/v1/dealAdminRoute');
+    var OutletAdminRoute = require('./adminAPI/v1/outletAdminRoute');
 
     LoginRoute.use(adminRouter);
     //RegisterRoute.use(adminRouter);
@@ -55,6 +56,7 @@ function populateAdminAPI(adminRouter){
     UserRoute.use(adminRouter);
     MerchantAdminRoute.use(adminRouter);
     DealAdminRoute.use(adminRouter);
+    OutletAdminRoute.use(adminRouter);
 }
 
 /**
