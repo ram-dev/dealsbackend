@@ -238,7 +238,8 @@ function dealUpdate(req, res, next){
                 amountBody.type = ACCOUNT_TRANSACTION_TYPE_ADD;
                 amountBody.paymentinfo = 'refund for Deal Live';
             }
-            dealinfo.status = modifiedData.status;    
+            dealinfo.status = modifiedData.status;
+            dealinfo.golive = modifiedData.golive;    
             dealinfo.updated_by = req.user._id;
             dealinfo._editor = req.user;
             dealinfo.save(function(err, dealData) {
