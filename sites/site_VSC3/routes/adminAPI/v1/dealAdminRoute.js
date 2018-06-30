@@ -107,6 +107,11 @@ function queryPageing(req, res, next) {
 
     if(req.query.golive != undefined){
         req.yoz.query.golive = req.query.golive;
+        req.yoz.query.status = false;
+    }
+
+    if(req.query.status != undefined){       
+        req.yoz.query.status = req.query.status;
     }
 
     next();
