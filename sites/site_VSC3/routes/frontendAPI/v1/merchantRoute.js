@@ -6,7 +6,7 @@ var async = require("async");
 var Config = require('../../../config');
 var mongoose = require('mongoose');
 var activityLogg = require('../../../util/activityLogg');
-var fs =require('fs')
+var fs = require('file-system');
 
 const STRINGS = {
 

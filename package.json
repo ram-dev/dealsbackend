@@ -21,6 +21,7 @@
     "drupal-hash": "^1.0.4",
     "eventemittercollector": "^0.3.14",
     "express": "^4.13.4",
+    "file-system": "^2.2.2",
     "keygenerator": "^1.0.4",
     "md5-file": "^3.1.1",
     "method-override": "^2.3.6",
