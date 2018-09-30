@@ -24,9 +24,40 @@ module.exports.use = function(Router) {
     Router.post('/v1/merchant/:merchantId', merchantSave());
     Router.post('/v1/merchant/:merchantId/images', merchantSaveImg());
     Router.get('/v1/merchant/:merchantId/images', getMerchantImg());  
+    Router.delete('/v1/merchant/:merchantId/images/:imageId', deleteMerchantImg());
     Router.get('/v1/transaction/:merchantId', getMechantTransaction());    
 
 };
+
+function deleteMerchantImg(){
+    return [
+        passport.isBearerAndMerchantOrMerchantAdminOrSuperAdmin,
+        function(req, res, next) {
+            req.yoz.query = {};
+            var merchantId = req.params.merchantId;
+            var imageId = req.params.imageId;
+            if (merchantId === undefined) {
+                return restHelper.badRequest(res, 'merchantId is missing');
+            }
+            if(imageId === undefined){
+                return restHelper.badRequest(res, 'imageId is missing');
+            }
+            req.yoz.query._id = imageId;
+            next();
+        },
+        CheckUserAccess,
+        function deleteImage(req, res, next){
+            var GalleryModel = req.yoz.db.model(dbModels.galleryModel);
+            var query = req.yoz.query;
+            GalleryModel.remove(query, function(err) {
+                if (err) {
+                    return restHelper.unexpectedError(res, err);
+                }
+                return res.status(200).json({ "status": "OK" });
+            });
+        }
+    ]
+}
 
 function getMechantTransaction() {
     return [
