@@ -205,7 +205,12 @@ function merchantSaveImg() {
             var filename = req.yoz.galleryObject._id+'_'+req.body.image.filename;
             var fullpath = 'http://'+req.hostname+':3000/resources/' + filename;
             var relativePath = path+filename;
-            fs.writeFile(relativePath, buf);
+            fs.writeFile(relativePath, buf,function(err) {
+                if(err) {
+                    return console.log(err);
+                }
+                console.log("File saved successfully!");
+            });
             var user = req.user;
             var galleryObject = req.yoz.galleryObject;
             galleryObject.path = fullpath;           
